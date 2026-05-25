@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { FaInstagram, FaTiktok, FaFacebook } from "react-icons/fa";
 import About from "../pages/About";
+import { Link } from "react-router-dom";
 
 export default function Hero() {
   const canvasRef = useRef(null);
@@ -112,7 +113,7 @@ export default function Hero() {
 
         {/* Buttons */}
         <div className="flex flex-col sm:flex-row justify-center gap-4 mb-10">
-          <button
+          <Link to="/results-for-me" className="px-7 py-3 rounded-xl text-white font-bold text-sm transition-all duration-300"
             className="px-7 py-3 rounded-xl text-white font-bold text-sm transition-all duration-300"
             style={{
               background: "#e63946",
@@ -126,12 +127,13 @@ export default function Hero() {
               (e.currentTarget.style.boxShadow =
                 "0 0 20px rgba(230,57,70,0.5)")
             }
+         
           >
             My Transformations
-          </button>
-          <button className="px-7 py-3 rounded-xl text-white font-bold text-sm border border-[#444] hover:border-[#e63946] transition-all duration-300 bg-transparent">
+          </Link>
+          <Link to="/contact" className="px-7 py-3 rounded-xl text-white font-bold text-sm border border-[#444] hover:border-[#e63946] transition-all duration-300 bg-transparent">
             Get Started
-          </button>
+          </Link>
         </div>
 
         {/* Social Icons */}

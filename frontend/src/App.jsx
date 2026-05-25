@@ -62,6 +62,8 @@ import axios from "axios";
 import Packages from "./pages/Packages";
 import Results from "./pages/Results";
 import Resultsforme from "./pages/Resultsforme";
+import ImportantNotes from "./pages/ImportantNotes";
+import ContactSection from "./pages/ContactSection";
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const App = () => {
@@ -96,6 +98,8 @@ const App = () => {
           <Route path="/packages" element={<Packages />} />
           <Route path="/results" element={<Results />} />
           <Route path="/results-for-me" element={<Resultsforme />} />
+          <Route path="/important-notes" element={<ImportantNotes />} />
+          <Route path="/contact-section" element={<ContactSection/>} />
           {/* <Route path="/product/:productId" element={<Product />} /> */}
           {/* <Route path="/cart" element={<Cart />} /> */}
           {/* <Route path="/login" element={<Login />} /> */}

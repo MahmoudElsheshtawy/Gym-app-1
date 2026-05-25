@@ -30,13 +30,15 @@ const plans2 = [
     name: "عرض 6 شهور",
     price: "1999",
     period: "/Month",
-    features: ["ملف تغذية", "نظام تدريب مخصص", "خصم مدة طويلة"],
+    note: "وفر 15%",
+    features: ["ملف تغذية", "نظام تدريب مخصص", "خصم مدة طويلة", "متابعة شهرية"],
   },
   {
     name: "عرض الصحاب",
     price: "2300",
     period: "For 2",
-    features: ["ملف تغذية", "نظام تدريب مخصص"],
+    note: "اشترك مع صديقك",
+    features: ["ملف تغذية للشخصين", "نظام تدريب مخصص", "تحديات جماعية"],
   },
 ];
 
@@ -46,49 +48,53 @@ const features = [
   { icon: "🥗", title: "تغذية", desc: "نظام غذائي مناسب لك" },
   { icon: "🧘", title: "إطالات", desc: "تحسين المرونة والتعافي" },
   { icon: "📅", title: "متابعة", desc: "تحديث أسبوعي مستمر" },
-  { icon: "💬", title: "واتساب", desc: "دعم مباشر" },
+  { icon: "💬", title: "واتساب", desc: "دعم مباشر 24/7" },
 ];
 
 function PlanCard({ plan }) {
   return (
     <div
-      className={`relative rounded-2xl p-5 border transition duration-300 hover:scale-[1.02]
+      className={`relative rounded-2xl p-4 sm:p-5 border transition-all duration-300 hover:scale-[1.02] hover:shadow-xl
       ${
         plan.featured
-          ? "border-red-500 bg-red-500/10"
-          : "border-white/10 bg-white/5"
+          ? "border-red-500 bg-gradient-to-br from-red-500/15 to-red-500/5 shadow-red-500/10"
+          : "border-white/10 bg-white/5 hover:border-red-500/30"
       }`}
     >
       {plan.featured && (
-        <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-red-500 text-xs px-3 py-1 rounded-full font-bold">
-          MOST VALUE
+        <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-red-600 to-red-500 text-white text-[11px] sm:text-xs px-3 py-1 rounded-full font-bold shadow-lg whitespace-nowrap">
+          🔥 BEST VALUE
         </div>
       )}
 
-      <h3 className="text-white font-bold text-lg">{plan.name}</h3>
+      <h3 className="text-white font-bold text-base sm:text-lg mb-2">{plan.name}</h3>
 
-      <div className="mt-2 text-3xl font-black text-white">
-        {plan.price}{" "}
-        <span className="text-sm text-white/50 font-normal">LE</span>
+      <div className="mt-2">
+        <span className="text-2xl sm:text-3xl font-black text-white">{plan.price}</span>
+        <span className="text-xs sm:text-sm text-white/50 font-normal"> LE</span>
+        <span className="text-[10px] sm:text-xs text-white/40 ml-1">{plan.period}</span>
       </div>
 
-      <p className="text-red-400 text-xs mt-1">{plan.note}</p>
+      {plan.note && (
+        <p className="text-red-400 text-[11px] sm:text-xs mt-2 font-semibold">{plan.note}</p>
+      )}
 
-      <div className="border-t border-white/10 my-3"></div>
+      <div className="border-t border-white/10 my-3 sm:my-4"></div>
 
-      <div className="space-y-2">
+      <div className="space-y-2 min-h-[120px] sm:min-h-[140px]">
         {plan.features.map((f, i) => (
-          <div key={i} className="text-white/70 text-sm flex gap-2">
-            <span className="text-red-500">✓</span> {f}
+          <div key={i} className="text-white/70 text-xs sm:text-sm flex gap-2 items-start">
+            <span className="text-red-500 text-xs sm:text-sm mt-0.5 flex-shrink-0">✓</span>
+            <span className="flex-1 leading-relaxed">{f}</span>
           </div>
         ))}
       </div>
 
       <button
-        className={`w-full mt-5 py-2 rounded-lg font-bold transition
+        className={`w-full mt-4 sm:mt-5 py-2 sm:py-2.5 rounded-lg font-bold transition-all duration-300
         ${
           plan.featured
-            ? "bg-red-500 hover:bg-red-600"
+            ? "bg-gradient-to-r from-red-600 to-red-500 hover:from-red-700 hover:to-red-600 shadow-lg shadow-red-500/30"
             : "border border-red-500 text-red-500 hover:bg-red-500 hover:text-white"
         }`}
       >
@@ -100,42 +106,74 @@ function PlanCard({ plan }) {
 
 export default function Packages() {
   return (
-    <div className="bg-[#050505] text-white min-h-screen px-4 sm:px-8 lg:px-20 py-16 font-[Cairo]">
+    <div className="bg-gradient-to-b from-[#050505] to-[#0a0a0a] text-white min-h-screen px-4 sm:px-6 lg:px-20 pt-28 pb-16 font-[Cairo]">
 
-      {/* Title */}
-      <h1 className="text-center text-3xl font-black mb-2">
-        CHOOSE YOUR <span className="text-red-500">PACKAGE</span>
-      </h1>
-
-      <p className="text-center text-white/50 text-sm mb-10">
-        عروض تدريب أونلاين احترافية
-      </p>
-
-      {/* FEATURES */}
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-12">
-        {features.map((f, i) => (
-          <div
-            key={i}
-            className="bg-white/5 border border-white/10 rounded-xl p-4 text-center"
-          >
-            <div className="text-xl mb-2">{f.icon}</div>
-            <h4 className="text-white font-bold text-sm">{f.title}</h4>
-            <p className="text-white/50 text-xs mt-1">{f.desc}</p>
+      {/* Title Section with top spacing */}
+      <div className="text-center mb-12">
+        <div className="inline-block mb-4">
+          <div className="flex justify-center">
+            <div className="w-16 h-1 bg-red-500 rounded-full"></div>
           </div>
-        ))}
+        </div>
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-black mb-3 tracking-tight">
+          CHOOSE YOUR <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-600">PACKAGE</span>
+        </h1>
+        <p className="text-white/50 text-sm max-w-md mx-auto">
+          عروض تدريب أونلاين احترافية تناسب أهدافك
+        </p>
       </div>
 
-      {/* PLANS */}
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
-        {plans.map((p, i) => (
-          <PlanCard key={i} plan={p} />
-        ))}
+      {/* FEATURES - Responsive Grid */}
+      <div className="mb-14">
+        <h2 className="text-center text-lg sm:text-xl font-bold mb-6 text-white/80">
+          <span className="text-red-500">★</span> المميزات <span className="text-red-500">★</span>
+        </h2>
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+          {features.map((f, i) => (
+            <div
+              key={i}
+              className="bg-white/5 border border-white/10 rounded-xl p-3 sm:p-4 text-center hover:bg-white/10 transition-all duration-300 hover:scale-105 hover:border-red-500/30 cursor-pointer group"
+            >
+              <div className="text-xl sm:text-2xl mb-2 group-hover:scale-110 transition-transform duration-300">{f.icon}</div>
+              <h4 className="text-white font-bold text-xs sm:text-sm">{f.title}</h4>
+              <p className="text-white/50 text-[10px] sm:text-xs mt-1 leading-relaxed">{f.desc}</p>
+            </div>
+          ))}
+        </div>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-        {plans2.map((p, i) => (
-          <PlanCard key={i} plan={p} />
-        ))}
+      {/* PLANS Section 1 */}
+      <div className="mb-10">
+        <h2 className="text-center text-base sm:text-lg font-semibold mb-5 text-white/70">
+          🎯 باقات البداية
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+          {plans.map((p, i) => (
+            <PlanCard key={i} plan={p} />
+          ))}
+        </div>
+      </div>
+
+      {/* PLANS Section 2 */}
+      <div>
+        <h2 className="text-center text-base sm:text-lg font-semibold mb-5 text-white/70">
+          ⭐ عروض خاصة
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+          {plans2.map((p, i) => (
+            <PlanCard key={i} plan={p} />
+          ))}
+        </div>
+      </div>
+
+      {/* Bottom Trust Badge */}
+      <div className="text-center pt-10 mt-6 border-t border-white/10">
+        <div className="flex flex-wrap justify-center gap-4 sm:gap-6 text-[10px] sm:text-xs text-white/40">
+          <span className="flex items-center gap-1">✅ دعم فني 24/7</span>
+          <span className="flex items-center gap-1">🔄 إلغاء في أي وقت</span>
+          <span className="flex items-center gap-1">🔒 دفع آمن</span>
+          <span className="flex items-center gap-1">📱 متابعة عبر واتساب</span>
+        </div>
       </div>
     </div>
   );

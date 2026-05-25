@@ -389,6 +389,7 @@ import { useContext, useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { ShopContext } from "../context/ShopContext";
 import { toast } from "react-toastify";
+import { Dumbbell } from "lucide-react";
 
 const Navbar = () => {
   const [scrolling, setScrolling] = useState(false);
@@ -419,10 +420,9 @@ const Navbar = () => {
     { name: "Home", path: "/" },
     { name: "About", path: "/about-me" },
     { name: "Results", path: "/results-for-me" },
-    { name: "reviews", path: "/reviews" },
-    { name: "packages", path: "/packages" },
-    { name: "contact", path: "/Contact" },
-
+    // { name: "Reviews", path: "/reviews" },
+    { name: "Packages", path: "/packages" },
+    { name: "Contact", path: "/Contact" },
   ];
 
   return (
@@ -431,21 +431,24 @@ const Navbar = () => {
       <div
         className={`fixed top-0 left-0 w-full z-[999] transition-all duration-500 ${
           scrolling
-            ? "bg-black/30 backdrop-blur-xl border-b border-white/10 shadow-lg"
+            ? "bg-black/30 backdrop-blur-xl shadow-lg"
             : "bg-transparent"
         }`}
       >
         <div className="flex items-center justify-between py-5 px-4 sm:px-[3%]">
 
-          {/* Logo */}
-          <Link to="/">
+          {/* Logo with Icon */}
+          <Link to="/" className="flex items-center gap-2 group">
+            <div className="p-1.5 bg-gradient-to-br from-red-600 to-red-700 rounded-xl shadow-lg shadow-red-500/20 group-hover:shadow-red-500/40 transition-all duration-300">
+              <Dumbbell className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+            </div>
             <h1 className="text-white text-xl sm:text-2xl md:text-3xl font-extrabold tracking-wide">
               Mo Nabil
             </h1>
           </Link>
 
-          {/* Desktop Links */}
-          <ul className="hidden sm:flex gap-8 text-white/80">
+          {/* Desktop Links - pushed to far right with ml-auto */}
+          <ul className="hidden text-lg sm:flex gap-8 text-white/80 ml-auto">
             {links.map((item, idx) => (
               <NavLink
                 key={idx}
@@ -460,7 +463,6 @@ const Navbar = () => {
 
           {/* Actions */}
           <div className="flex items-center gap-4 text-white">
-
             {token && (
               <button
                 onClick={logout}
@@ -507,8 +509,16 @@ const Navbar = () => {
           </button>
         </div>
 
+        {/* Mobile Logo */}
+        <div className="flex items-center justify-center gap-2 mb-8">
+          <div className="p-1.5 bg-gradient-to-br from-red-600 to-red-700 rounded-xl">
+            <Dumbbell className="w-5 h-5 text-white" />
+          </div>
+          <h1 className="text-white text-xl font-extrabold">Mo Nabil</h1>
+        </div>
+
         {/* Links */}
-        <div className="flex flex-col gap-6 px-8 mt-10">
+        <div className="flex flex-col gap-6 px-8 mt-4">
           {links.map((item, idx) => (
             <NavLink
               key={idx}

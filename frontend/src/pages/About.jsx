@@ -150,6 +150,7 @@ export default function About() {
         <div className="flex flex-col gap-6">
           {/* Tag */}
           <p
+          
             className="text-xs font-semibold tracking-[5px] uppercase"
             style={{ color: "#e63946" }}
           >

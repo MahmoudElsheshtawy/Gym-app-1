@@ -16,7 +16,7 @@ const transformations = [
 
 // Featured transformation (الكارد الكبير في الأعلى)
 const featured = {
-  images: [{src: assets.home}, {src: assets.blog}, {src: assets.bolbol}], // صور مختلفة لنفس العميل تظهر في السلايدر
+  images: [{src: assets.home}, {src: assets.blog}, {src: assets.bolbol}],
   title: "تحول جذري وشامل",
   subtitle: "قصة نجاح مميزة",
   desc: "الالتزام والاستمرارية مع نظام نبيل العلمي هو المفتاح لتحقيق النتائج المبهرة. هذا التحول هو مثال حي على أن المستقبل ممكن مع التوجيه الصحيح والإرادة القوية.",
@@ -43,7 +43,7 @@ function LazyImg({ src, alt, style }) {
       {!loaded && (
         <div style={{
           position: "absolute", inset: 0,
-          background: "linear-gradient(90deg,#1a1a1a 25%,#222 50%,#1a1a1a 75%)",
+          background: "linear-gradient(90deg,#1a1a1a 25%,#2a2a2a 50%,#1a1a1a 75%)",
           backgroundSize: "200% 100%",
           animation: "shimmer 1.4s infinite",
         }} />
@@ -95,24 +95,26 @@ function AnimatedCard({ children, delay = 0, style }) {
 
 function TransformCard({ item, delay }) {
   return (
-    <AnimatedCard delay={delay} style={{ borderRadius: 14, overflow: "hidden", border: "1px solid #2a2a2a", background: "#161616", position: "relative" }}>
+    <AnimatedCard delay={delay} style={{ borderRadius: 16, overflow: "hidden", border: "1px solid #2a2a2a", background: "#141414", position: "relative", transition: "transform 0.3s ease, box-shadow 0.3s ease", cursor: "pointer" }}>
       {item.flag && (
-        <div style={{ position: "absolute", top: 8, right: 8, zIndex: 10, fontSize: 22 }}>{item.flag}</div>
+        <div style={{ position: "absolute", top: 10, right: 10, zIndex: 10, fontSize: 24, background: "rgba(0,0,0,0.5)", borderRadius: "50%", width: 36, height: 36, display: "flex", alignItems: "center", justifyContent: "center", backdropFilter: "blur(4px)" }}>
+          {item.flag}
+        </div>
       )}
       {item.label && (
-        <div style={{ position: "absolute", top: 8, left: "50%", transform: "translateX(-50%)", zIndex: 10, background: "rgba(0,0,0,0.75)", color: "#fff", fontSize: 11, fontWeight: 700, padding: "3px 10px", borderRadius: 20, whiteSpace: "nowrap" }}>
+        <div style={{ position: "absolute", top: 12, left: "50%", transform: "translateX(-50%)", zIndex: 10, background: "rgba(0,0,0,0.8)", color: "#fff", fontSize: 11, fontWeight: 800, padding: "4px 12px", borderRadius: 30, whiteSpace: "nowrap", backdropFilter: "blur(4px)", letterSpacing: 0.5 }}>
           {item.label}
         </div>
       )}
-      <div style={{ display: "flex", height: 180 }}>
+      <div style={{ display: "flex", height: "clamp(160px, 40vw, 200px)" }}>
         <div style={{ flex: 1, position: "relative" }}>
           <LazyImg src={item.before} alt="before" />
-          <div style={{ position: "absolute", bottom: 6, left: 6, background: "rgba(0,0,0,0.7)", color: "#aaa", fontSize: 10, fontWeight: 700, padding: "2px 8px", borderRadius: 10 }}>BEFORE</div>
+          <div style={{ position: "absolute", bottom: 8, left: 8, background: "rgba(0,0,0,0.75)", color: "#999", fontSize: 10, fontWeight: 800, padding: "3px 10px", borderRadius: 20, letterSpacing: 0.5 }}>قبل</div>
         </div>
-        <div style={{ width: 2, background: "#e63946", flexShrink: 0 }} />
+        <div style={{ width: 3, background: "linear-gradient(to bottom, #e63946, #ff6b6b)", flexShrink: 0 }} />
         <div style={{ flex: 1, position: "relative" }}>
           <LazyImg src={item.after} alt="after" />
-          <div style={{ position: "absolute", bottom: 6, right: 6, background: "rgba(230,57,70,0.85)", color: "#fff", fontSize: 10, fontWeight: 700, padding: "2px 8px", borderRadius: 10 }}>AFTER</div>
+          <div style={{ position: "absolute", bottom: 8, right: 8, background: "#e63946", color: "#fff", fontSize: 10, fontWeight: 800, padding: "3px 10px", borderRadius: 20, letterSpacing: 0.5 }}>بعد</div>
         </div>
       </div>
     </AnimatedCard>
@@ -123,34 +125,57 @@ export default function Resultsforme() {
   const [featIdx, setFeatIdx] = useState(0);
 
   useEffect(() => {
-    const t = setInterval(() => setFeatIdx((p) => (p + 1) % featured.images.length), 3000);
+    const t = setInterval(() => setFeatIdx((p) => (p + 1) % featured.images.length), 4000);
     return () => clearInterval(t);
   }, []);
 
   return (
-    <div style={{ background: "#0d0d0d", minHeight: "100vh", color: "#fff", fontFamily: "'Cairo',sans-serif", direction: "rtl", padding: "3rem 1rem" }}>
+    <div style={{ background: "radial-gradient(circle at 20% 50%, #0a0a0a, #050505)", minHeight: "100vh", color: "#fff", fontFamily: "'Cairo', 'Segoe UI', sans-serif", direction: "rtl", padding: "5rem 1rem 3rem" }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap');
         @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
-        @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+        @keyframes fadeUp { 
+          from{opacity:0;transform:translateY(30px)} 
+          to{opacity:1;transform:translateY(0)} 
+        }
+        @keyframes pulse {
+          0%,100%{opacity:1}
+          50%{opacity:0.5}
+        }
+        .transform-card:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 8px 30px rgba(230,57,70,0.15);
+          border-color: #e63946 !important;
+        }
+        @media (max-width: 640px) {
+          .featured-text {
+            padding: 1rem !important;
+          }
+          .featured-stats {
+            gap: 4px !important;
+          }
+        }
       `}</style>
 
       {/* Header */}
-      <div style={{ textAlign: "center", marginBottom: "2.5rem", animation: "fadeUp 0.7s ease forwards" }}>
-        <h1 style={{ fontSize: "clamp(32px,6vw,56px)", fontWeight: 900, letterSpacing: 4, textTransform: "uppercase", color: "#e63946", margin: 0 }}>
-          RESULTS
+      <div style={{ textAlign: "center", marginBottom: "2rem", animation: "fadeUp 0.7s ease forwards", paddingTop: "1rem" }}>
+        <div style={{ display: "inline-block", marginBottom: "0.5rem" }}>
+          <div style={{ width: 50, height: 3, background: "#e63946", borderRadius: 2, margin: "0 auto" }} />
+        </div>
+        <h1 style={{ fontSize: "clamp(36px, 8vw, 60px)", fontWeight: 900, letterSpacing: 3, textTransform: "uppercase", background: "linear-gradient(135deg, #e63946, #ff6b6b)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", margin: 0 }}>
+          النتائج
         </h1>
-        <p style={{ color: "#888", fontSize: 13, marginTop: 8 }}>
-          نتائج تحول العملاء • نماذج حقيقية من التغيير الجسدي والتفوق مع برنامج 
+        <p style={{ color: "#888", fontSize: 13, marginTop: 12, maxWidth: 500, marginLeft: "auto", marginRight: "auto", lineHeight: 1.6 }}>
+          نتائج تحول العملاء • نماذج حقيقية من التغيير الجسدي والتفوق مع برنامج نبيل
         </p>
       </div>
 
       {/* Featured Card */}
-      <AnimatedCard delay={100} style={{ maxWidth: 760, margin: "0 auto 2.5rem", background: "#161616", border: "2px solid #2a2a2a", borderRadius: 18, overflow: "hidden", display: "flex", flexWrap: "wrap" }}>
+      <AnimatedCard delay={100} style={{ maxWidth: 900, margin: "0 auto 2rem", background: "#121212", border: "1px solid #2a2a2a", borderRadius: 24, overflow: "hidden", display: "flex", flexWrap: "wrap", boxShadow: "0 20px 40px rgba(0,0,0,0.3)" }}>
         {/* Images Slideshow */}
-        <div style={{ position: "relative", width: 280, minWidth: 220, flexShrink: 0, background: "#111" }}>
-          <div style={{ position: "absolute", top: 10, right: 10, zIndex: 10, background: "#e63946", color: "#fff", fontSize: 9, fontWeight: 900, letterSpacing: 2, padding: "3px 10px", borderRadius: 20 }}>
-            FEATURED RESULT
+        <div style={{ position: "relative", width: "clamp(200px, 40%, 300px)", minWidth: 310, flexShrink: 0, background: "#0a0a0a" }}>
+          <div style={{ position: "absolute", top: 12, right: 12, zIndex: 10, background: "#e63946", color: "#fff", fontSize: 9, fontWeight: 900, letterSpacing: 2, padding: "4px 12px", borderRadius: 30, boxShadow: "0 2px 8px rgba(0,0,0,0.3)" }}>
+            مميز
           </div>
           {featured.images.map((src, i) => (
             <div
@@ -166,36 +191,58 @@ export default function Resultsforme() {
           ))}
           <div style={{ paddingTop: "120%" }} />
           {/* Dots */}
-          <div style={{ position: "absolute", bottom: 10, left: "50%", transform: "translateX(-50%)", display: "flex", gap: 5, zIndex: 10 }}>
+          <div style={{ position: "absolute", bottom: 12, left: "50%", transform: "translateX(-50%)", display: "flex", gap: 8, zIndex: 10 }}>
             {featured.images.map((_, i) => (
-              <div key={i} onClick={() => setFeatIdx(i)} style={{ width: i === featIdx ? 16 : 6, height: 6, borderRadius: 3, background: i === featIdx ? "#e63946" : "#555", cursor: "pointer", transition: "all 0.3s" }} />
+              <div 
+                key={i} 
+                onClick={() => setFeatIdx(i)} 
+                style={{ 
+                  width: i === featIdx ? 20 : 6, 
+                  height: 6, 
+                  borderRadius: 3, 
+                  background: i === featIdx ? "#e63946" : "rgba(255,255,255,0.3)", 
+                  cursor: "pointer", 
+                  transition: "all 0.3s ease",
+                  boxShadow: i === featIdx ? "0 0 6px rgba(230,57,70,0.5)" : "none"
+                }} 
+              />
             ))}
           </div>
         </div>
 
         {/* Text */}
-        <div style={{ flex: 1, padding: "1.5rem", display: "flex", flexDirection: "column", justifyContent: "center" }}>
-          <h2 style={{ fontSize: 22, fontWeight: 900, color: "#fff", margin: "0 0 4px" }}>{featured.title}</h2>
-          <h3 style={{ fontSize: 18, fontWeight: 700, color: "#e63946", margin: "0 0 12px" }}>{featured.subtitle}</h3>
-          <p style={{ fontSize: 13, color: "#aaa", lineHeight: 1.85, marginBottom: 16 }}>{featured.desc}</p>
-          <div style={{ display: "flex", flexDirection: "column", gap: 6, marginBottom: 20 }}>
+        <div className="featured-text" style={{ flex: 1, padding: "1.2rem 1.5rem", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+          <h2 style={{ fontSize: "clamp(18px, 4vw, 22px)", fontWeight: 900, color: "#fff", margin: "0 0 4px" }}>{featured.title}</h2>
+          <h3 style={{ fontSize: "clamp(14px, 3vw, 18px)", fontWeight: 700, color: "#e63946", margin: "0 0 10px" }}>{featured.subtitle}</h3>
+          <p style={{ fontSize: 12, color: "#aaa", lineHeight: 1.7, marginBottom: 14 }}>{featured.desc}</p>
+          <div className="featured-stats" style={{ display: "flex", flexDirection: "column", gap: 5, marginBottom: 16 }}>
             {featured.stats.map((s, i) => (
-              <div key={i} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 12, color: "#ccc" }}>
-                <span style={{ color: "#e63946", fontSize: 16 }}>◆</span> {s}
+              <div key={i} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 11, color: "#ccc" }}>
+                <span style={{ color: "#e63946", fontSize: 12 }}>✦</span> 
+                <span>{s}</span>
               </div>
             ))}
           </div>
-          <button style={{ alignSelf: "flex-start", background: "#e63946", border: "none", color: "#fff", borderRadius: 8, padding: "9px 22px", fontWeight: 700, fontSize: 13, cursor: "pointer", fontFamily: "inherit", letterSpacing: 1 }}>
-            FULL VIEW
+          <button style={{ alignSelf: "flex-start", background: "linear-gradient(135deg, #e63946, #d62c3a)", border: "none", color: "#fff", borderRadius: 40, padding: "8px 24px", fontWeight: 700, fontSize: 12, cursor: "pointer", fontFamily: "inherit", letterSpacing: 1, transition: "transform 0.2s, box-shadow 0.2s", boxShadow: "0 4px 12px rgba(230,57,70,0.3)" }}>
+            عرض التفاصيل
           </button>
         </div>
       </AnimatedCard>
 
       {/* Grid */}
-      <div style={{ maxWidth: 900, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(260px,1fr))", gap: 14 }}>
+      <div style={{ maxWidth: 1000, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 16, padding: "0 0.5rem" }}>
         {transformations.map((item, i) => (
-          <TransformCard key={i} item={item} delay={i * 80} />
+          <div key={i} className="transform-card">
+            <TransformCard item={item} delay={i * 60} />
+          </div>
         ))}
+      </div>
+
+      {/* Footer Note */}
+      <div style={{ textAlign: "center", marginTop: "2.5rem", paddingTop: "1.5rem", borderTop: "1px solid #2a2a2a", maxWidth: 600, marginLeft: "auto", marginRight: "auto" }}>
+        <p style={{ fontSize: 10, color: "#666", letterSpacing: 0.5 }}>
+          نتائج حقيقية لعملاء البرنامج • كل حالة فردية لها ظروفها الخاصة
+        </p>
       </div>
     </div>
   );

@@ -1,256 +1,149 @@
-// import { useState } from "react";
-
-// // ضيف صورك هنا
-// const images = [
-//   { src: "/images/client1.jpg", alt: "Client 1" },
-//   { src: "/images/client2.jpg", alt: "Client 2" },
-//   { src: "/images/client3.jpg", alt: "Client 3" },
-//   { src: "/images/client4.jpg", alt: "Client 4" },
-//   { src: "/images/client5.jpg", alt: "Client 5" },
-//   { src: "/images/client6.jpg", alt: "Client 6" },
-//   { src: "/images/client7.jpg", alt: "Client 7" },
-//   { src: "/images/client8.jpg", alt: "Client 8" },
-// ];
-
-// const VISIBLE = 4;
-
-// export default function Results() {
-//   const [current, setCurrent] = useState(0);
-//   const total = images.length;
-
-//   const prev = () => setCurrent((p) => (p - 1 + total) % total);
-//   const next = () => setCurrent((p) => (p + 1) % total);
-
-//   const getVisible = () => {
-//     const result = [];
-//     for (let i = 0; i < VISIBLE; i++) {
-//       result.push(images[(current + i) % total]);
-//     }
-//     return result;
-//   };
-
-//   return (
-//     <div
-//       style={{
-//         background: "#0d0d0d",
-//         minHeight: "100vh",
-//         display: "flex",
-//         flexDirection: "column",
-//         alignItems: "center",
-//         justifyContent: "center",
-//         padding: "3rem 1rem",
-//         fontFamily: "'Cairo', sans-serif",
-//       }}
-//     >
-//       <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet" />
-
-//       {/* Header */}
-//       <p style={{ color: "#e63946", fontSize: 13, letterSpacing: 4, textTransform: "uppercase", marginBottom: 8 }}>
-//         RESULTS
-//       </p>
-//       <h2
-//         style={{
-//           fontSize: "clamp(28px, 5vw, 52px)",
-//           fontWeight: 900,
-//           textTransform: "uppercase",
-//           letterSpacing: 2,
-//           marginBottom: "2.5rem",
-//           textAlign: "center",
-//         }}
-//       >
-//         <span style={{ color: "#fff" }}>CLIENT </span>
-//         <span style={{ color: "#e63946" }}>TRANSFORMATIONS</span>
-//       </h2>
-
-//       {/* Slider */}
-//       <div style={{ position: "relative", width: "100%", maxWidth: 1100, display: "flex", alignItems: "center" }}>
-//         {/* Prev Button */}
-//         <button
-//           onClick={prev}
-//           style={{
-//             position: "absolute",
-//             left: -20,
-//             zIndex: 10,
-//             width: 40,
-//             height: 40,
-//             borderRadius: "50%",
-//             background: "#1a1a1a",
-//             border: "1px solid #333",
-//             color: "#fff",
-//             fontSize: 18,
-//             cursor: "pointer",
-//             display: "flex",
-//             alignItems: "center",
-//             justifyContent: "center",
-//           }}
-//         >
-//           ‹
-//         </button>
-
-//         {/* Images */}
-//         <div style={{ display: "flex", gap: 14, width: "100%", overflow: "hidden" }}>
-//           {getVisible().map((img, i) => (
-//             <div
-//               key={i}
-//               style={{
-//                 flex: "1 1 0",
-//                 aspectRatio: "9/16",
-//                 borderRadius: 16,
-//                 overflow: "hidden",
-//                 border: "2px solid #2a2a2a",
-//                 background: "#1a1a1a",
-//                 position: "relative",
-//               }}
-//             >
-//               <img
-//                 src={img.src}
-//                 alt={img.alt}
-//                 style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-//               />
-//               {/* Red glow bottom */}
-//               <div
-//                 style={{
-//                   position: "absolute",
-//                   bottom: 0,
-//                   left: 0,
-//                   right: 0,
-//                   height: 80,
-//                   background: "linear-gradient(to top, rgba(230,57,70,0.3), transparent)",
-//                   pointerEvents: "none",
-//                 }}
-//               />
-//             </div>
-//           ))}
-//         </div>
-
-//         {/* Next Button */}
-//         <button
-//           onClick={next}
-//           style={{
-//             position: "absolute",
-//             right: -20,
-//             zIndex: 10,
-//             width: 40,
-//             height: 40,
-//             borderRadius: "50%",
-//             background: "#1a1a1a",
-//             border: "1px solid #333",
-//             color: "#fff",
-//             fontSize: 18,
-//             cursor: "pointer",
-//             display: "flex",
-//             alignItems: "center",
-//             justifyContent: "center",
-//           }}
-//         >
-//           ›
-//         </button>
-//       </div>
-
-//       {/* Dots */}
-//       <div style={{ display: "flex", gap: 6, marginTop: "1.5rem" }}>
-//         {images.map((_, i) => (
-//           <div
-//             key={i}
-//             onClick={() => setCurrent(i)}
-//             style={{
-//               width: i === current ? 20 : 8,
-//               height: 8,
-//               borderRadius: 4,
-//               background: i === current ? "#e63946" : "#444",
-//               cursor: "pointer",
-//               transition: "all 0.3s",
-//             }}
-//           />
-//         ))}
-//       </div>
-
-//       {/* Instagram Button */}
-//       <a
-//         href="https://instagram.com"
-//         target="_blank"
-//         rel="noopener noreferrer"
-//         style={{
-//           marginTop: "2rem",
-//           padding: "10px 28px",
-//           border: "1px solid #555",
-//           borderRadius: 30,
-//           color: "#fff",
-//           fontSize: 14,
-//           textDecoration: "none",
-//           background: "transparent",
-//           cursor: "pointer",
-//           letterSpacing: 1,
-//           transition: "border-color 0.2s",
-//         }}
-//         onMouseOver={(e) => (e.target.style.borderColor = "#e63946")}
-//         onMouseOut={(e) => (e.target.style.borderColor = "#555")}
-//       >
-//         See more on Instagram
-//       </a>
-//     </div>
-//   );
-// }
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
+import { assets } from "../assets/frontend_assets/assets";
+import { motion, AnimatePresence } from "framer-motion";
 
 const images = [
-  { src: "/images/client1.jpg", alt: "Client 1" },
-  { src: "/images/client2.jpg", alt: "Client 2" },
-  { src: "/images/client3.jpg", alt: "Client 3" },
-  { src: "/images/client4.jpg", alt: "Client 4" },
-  { src: "/images/client5.jpg", alt: "Client 5" },
-  { src: "/images/client6.jpg", alt: "Client 6" },
-  { src: "/images/client7.jpg", alt: "Client 7" },
-  { src: "/images/client8.jpg", alt: "Client 8" },
+  { src: assets.b, alt: "Client 1", name: "Sarah Johnson", result: "Lost 24 lbs in 3 months" },
+  { src: assets.blog, alt: "Client 2", name: "Mike Chen", result: "Gained 15 lbs muscle" },
+  { src: assets.bolbol, alt: "Client 3", name: "Emma Williams", result: "Body fat reduced by 12%" },
+  { src: assets.b4b, alt: "Client 4", name: "David Brown", result: "Lost 30 lbs in 4 months" },
+  { src: assets.b5b, alt: "Client 5", name: "Lisa Anderson", result: "Gained 10 lbs muscle" },
+  { src: assets.b6b, alt: "Client 6", name: "Tom Martinez", result: "Lost 18 lbs, 8% body fat" },
+  { src: assets.b7b, alt: "Client 7", name: "Rachel Green", result: "Transformed in 6 months" },
+  { src: assets.b8b, alt: "Client 8", name: "Chris Evans", result: "Competition ready" },
 ];
 
 export default function Results() {
   const scrollRef = useRef(null);
-
-  const [isDown, setIsDown] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
-
   const [selectedImage, setSelectedImage] = useState(null);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [showScrollHint, setShowScrollHint] = useState(true);
 
-  // Drag start
-  const startDrag = (e) => {
-    setIsDown(true);
-    setStartX(e.pageX || e.touches[0].pageX);
+  // Drag handlers with improved performance
+  const startDrag = useCallback((e) => {
+    const pageX = e.pageX || (e.touches && e.touches[0].pageX);
+    if (!pageX) return;
+    
+    setIsDragging(true);
+    setStartX(pageX);
     setScrollLeft(scrollRef.current.scrollLeft);
-  };
+    scrollRef.current.style.cursor = "grabbing";
+    scrollRef.current.style.scrollSnapType = "none";
+  }, []);
 
-  // Drag move
-  const onMove = (e) => {
-    if (!isDown) return;
+  const onMove = useCallback((e) => {
+    if (!isDragging) return;
     e.preventDefault();
-
-    const x = e.pageX || e.touches[0].pageX;
-    const walk = (x - startX) * 1.2;
-
+    
+    const pageX = e.pageX || (e.touches && e.touches[0].pageX);
+    if (!pageX) return;
+    
+    const walk = (pageX - startX) * 1.5;
     scrollRef.current.scrollLeft = scrollLeft - walk;
-  };
+  }, [isDragging, startX, scrollLeft]);
 
-  const stopDrag = () => setIsDown(false);
+  const stopDrag = useCallback(() => {
+    setIsDragging(false);
+    if (scrollRef.current) {
+      scrollRef.current.style.cursor = "grab";
+      scrollRef.current.style.scrollSnapType = "x mandatory";
+    }
+  }, []);
+
+  // Keyboard navigation
+  const handleKeyDown = useCallback((e) => {
+    if (!selectedImage) return;
+    
+    if (e.key === "Escape") {
+      setSelectedImage(null);
+    } else if (e.key === "ArrowLeft") {
+      const currentIndex = images.findIndex(img => img.src === selectedImage.src);
+      const prevIndex = currentIndex > 0 ? currentIndex - 1 : images.length - 1;
+      setSelectedImage(images[prevIndex]);
+    } else if (e.key === "ArrowRight") {
+      const currentIndex = images.findIndex(img => img.src === selectedImage.src);
+      const nextIndex = currentIndex < images.length - 1 ? currentIndex + 1 : 0;
+      setSelectedImage(images[nextIndex]);
+    }
+  }, [selectedImage]);
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [handleKeyDown]);
+
+  // Hide scroll hint after 3 seconds
+  useEffect(() => {
+    const timer = setTimeout(() => setShowScrollHint(false), 3000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const scroll = useCallback((direction) => {
+    const scrollAmount = direction === "left" ? -280 : 280;
+    scrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+  }, []);
 
   return (
-    <div className="bg-[#050505] min-h-screen flex flex-col items-center justify-center px-4 py-20 text-white">
+    <div className="bg-gradient-to-b from-[#050505] to-[#0a0a0a] min-h-screen flex flex-col items-center justify-center px-4 py-20 text-white">
+      {/* Animated title section */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="text-center"
+      >
+        <p className="text-red-500 text-xs tracking-[4px] mb-2 font-semibold">
+          RESULTS
+        </p>
+        <h2 className="text-xl md:text-6xl lg:text-7xl font-black mb-12">
+          CLIENT{" "}
+          <span className="text-red-500 bg-gradient-to-r from-red-500 to-red-600 bg-clip-text text-transparent">
+            TRANSFORMATIONS
+          </span>
+        </h2>
+      </motion.div>
 
-      {/* Title */}
-      <p className="text-red-500 text-xs tracking-[4px] mb-2">
-        RESULTS
-      </p>
+      {/* Slider container */}
+      <div className="relative w-full max-w-7xl mx-auto group">
+        {/* Scroll hint */}
+        {showScrollHint && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            className="absolute -top-8 left-1/2 transform -translate-x-1/2 text-xs text-white/50 flex items-center gap-2 z-10"
+          >
+            <span>←</span>
+            Drag to scroll
+            <span>→</span>
+          </motion.div>
+        )}
 
-      <h2 className="text-3xl md:text-5xl font-black text-center mb-12">
-        CLIENT <span className="text-red-500">TRANSFORMATIONS</span>
-      </h2>
+        {/* Navigation buttons - desktop */}
+        <button
+          onClick={() => scroll("left")}
+          className="absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/80 backdrop-blur-sm border border-white/20 text-white text-xl hover:bg-red-500 hover:scale-110 transition-all duration-300 opacity-0 group-hover:opacity-100 z-10 disabled:opacity-30 disabled:cursor-not-allowed"
+          aria-label="Previous slide"
+        >
+          ‹
+        </button>
 
-      {/* Slider */}
-      <div className="relative w-full max-w-6xl">
+        <button
+          onClick={() => scroll("right")}
+          className="absolute right-0 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/80 backdrop-blur-sm border border-white/20 text-white text-xl hover:bg-red-500 hover:scale-110 transition-all duration-300 opacity-0 group-hover:opacity-100 z-10"
+          aria-label="Next slide"
+        >
+          ›
+        </button>
 
+        {/* Scrollable container */}
         <div
           ref={scrollRef}
-          className="flex gap-4 overflow-x-auto cursor-grab active:cursor-grabbing scrollbar-hide scroll-smooth"
+          className="flex gap-5 overflow-x-auto cursor-grab active:cursor-grabbing scrollbar-hide scroll-smooth py-4 px-2"
+          style={{ scrollSnapType: "x mandatory" }}
           onMouseDown={startDrag}
           onMouseMove={onMove}
           onMouseUp={stopDrag}
@@ -260,74 +153,131 @@ export default function Results() {
           onTouchEnd={stopDrag}
         >
           {images.map((img, i) => (
-            <div
+            <motion.div
               key={i}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: i * 0.1 }}
+              whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
               onClick={() => setSelectedImage(img)}
-              className="min-w-[180px] md:min-w-[240px] aspect-[9/16] rounded-xl overflow-hidden border border-white/10 bg-white/5 shrink-0 relative cursor-pointer hover:scale-[1.03] transition"
+              className="min-w-[200px] md:min-w-[260px] lg:min-w-[280px] aspect-[9/16] rounded-2xl overflow-hidden border-2 border-white/10 bg-gradient-to-br from-white/5 to-transparent relative cursor-pointer group/item transition-all duration-300 hover:border-red-500/50 hover:shadow-2xl hover:shadow-red-500/20"
+              style={{ scrollSnapAlign: "start" }}
+              onMouseEnter={() => setHoveredIndex(i)}
+              onMouseLeave={() => setHoveredIndex(null)}
             >
               <img
                 src={img.src}
                 alt={img.alt}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover/item:scale-110"
+                loading="lazy"
               />
 
-              {/* glow */}
-              <div className="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-red-500/30 to-transparent" />
-            </div>
+              {/* Gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover/item:opacity-100 transition-opacity duration-300" />
+
+              {/* Image info overlay */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: hoveredIndex === i ? 1 : 0, y: hoveredIndex === i ? 0 : 20 }}
+                className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/90 to-transparent"
+              >
+                <p className="text-white font-bold text-sm">{img.name}</p>
+                <p className="text-red-400 text-xs">{img.result}</p>
+              </motion.div>
+
+              {/* Glow effect */}
+              <div className="absolute inset-0 opacity-0 group-hover/item:opacity-100 transition-opacity duration-300 pointer-events-none">
+                <div className="absolute inset-0 shadow-[inset_0_0_20px_rgba(239,68,68,0.3)]" />
+              </div>
+            </motion.div>
           ))}
         </div>
-
-        {/* buttons */}
-        <button
-          onClick={() =>
-            scrollRef.current.scrollBy({ left: -220, behavior: "smooth" })
-          }
-          className="absolute left-2 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-black/70 border border-white/10 text-white text-xs hover:bg-red-500 transition"
-        >
-          ‹
-        </button>
-
-        <button
-          onClick={() =>
-            scrollRef.current.scrollBy({ left: 220, behavior: "smooth" })
-          }
-          className="absolute right-2 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-black/70 border border-white/10 text-white text-xs hover:bg-red-500 transition"
-        >
-          ›
-        </button>
       </div>
 
-      {/* Instagram */}
-      <a
+      {/* Instagram link */}
+      <motion.a
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.5 }}
         href="https://instagram.com"
         target="_blank"
-        className="mt-10 px-6 py-2 border border-white/20 rounded-full text-sm hover:border-red-500 transition"
+        rel="noopener noreferrer"
+        className="mt-12 px-8 py-3 border-2 border-white/20 rounded-full text-sm font-semibold hover:border-red-500 hover:bg-red-500 hover:text-white transition-all duration-300 flex items-center gap-2 group"
       >
-        See more on Instagram
-      </a>
+        <span>📸</span>
+        See more transformations on Instagram
+        <span className="transform group-hover:translate-x-1 transition-transform">→</span>
+      </motion.a>
 
-      {/* ================= MODAL ================= */}
-      {selectedImage && (
-        <div
-          className="fixed inset-0 bg-black/90 flex items-center justify-center z-[9999] p-4"
-          onClick={() => setSelectedImage(null)}
-        >
-          {/* image */}
-          <img
-            src={selectedImage.src}
-            alt={selectedImage.alt}
-            className="max-h-[90vh] max-w-[90vw] rounded-xl shadow-2xl border border-white/10"
-          />
-
-          {/* close button */}
-          <button
+      {/* Modal with improved UX */}
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/95 backdrop-blur-md flex items-center justify-center z-[9999] p-4"
             onClick={() => setSelectedImage(null)}
-            className="absolute top-5 right-5 text-white text-2xl"
           >
-            ✕
-          </button>
-        </div>
-      )}
+            {/* Modal content */}
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="relative max-w-5xl w-full"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={selectedImage.src}
+                alt={selectedImage.alt}
+                className="w-full h-auto max-h-[85vh] object-contain rounded-2xl shadow-2xl"
+              />
+
+              {/* Image info in modal */}
+              <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent rounded-b-2xl">
+                <p className="text-white text-2xl font-bold">{selectedImage.name}</p>
+                <p className="text-red-400 text-lg">{selectedImage.result}</p>
+              </div>
+
+              {/* Close button */}
+              <button
+                onClick={() => setSelectedImage(null)}
+                className="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/50 backdrop-blur-sm text-white text-2xl hover:bg-red-500 transition-all duration-300 flex items-center justify-center"
+                aria-label="Close modal"
+              >
+                ✕
+              </button>
+
+              {/* Navigation arrows in modal */}
+              <button
+                onClick={() => {
+                  const currentIndex = images.findIndex(img => img.src === selectedImage.src);
+                  const prevIndex = currentIndex > 0 ? currentIndex - 1 : images.length - 1;
+                  setSelectedImage(images[prevIndex]);
+                }}
+                className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/50 backdrop-blur-sm text-white text-3xl hover:bg-red-500 transition-all duration-300 flex items-center justify-center"
+                aria-label="Previous image"
+              >
+                ‹
+              </button>
+
+              <button
+                onClick={() => {
+                  const currentIndex = images.findIndex(img => img.src === selectedImage.src);
+                  const nextIndex = currentIndex < images.length - 1 ? currentIndex + 1 : 0;
+                  setSelectedImage(images[nextIndex]);
+                }}
+                className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/50 backdrop-blur-sm text-white text-3xl hover:bg-red-500 transition-all duration-300 flex items-center justify-center"
+                aria-label="Next image"
+              >
+                ›
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      
     </div>
+    
   );
 }
