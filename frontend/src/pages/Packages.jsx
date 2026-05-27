@@ -52,6 +52,26 @@ const features = [
 ];
 
 function PlanCard({ plan }) {
+  const handleWhatsApp = () => {
+    const phone = "201093482958"; // 🔴 غير الرقم هنا
+
+    const message = `
+مرحباً كابتن،
+
+أرغب في الاشتراك في الباقة التالية:
+
+📦 الباقة: ${plan.name}
+💰 السعر: ${plan.price} جنيه ${plan.period}
+
+📋 المميزات:
+${plan.features.map((f) => `✔ ${f}`).join("\n")}
+    `;
+
+    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+
+    window.open(url, "_blank");
+  };
+
   return (
     <div
       className={`relative rounded-2xl p-4 sm:p-5 border transition-all duration-300 hover:scale-[1.02] hover:shadow-xl
@@ -90,7 +110,9 @@ function PlanCard({ plan }) {
         ))}
       </div>
 
+      {/* ✅ هنا التعديل */}
       <button
+        onClick={handleWhatsApp}
         className={`w-full mt-4 sm:mt-5 py-2 sm:py-2.5 rounded-lg font-bold transition-all duration-300
         ${
           plan.featured
