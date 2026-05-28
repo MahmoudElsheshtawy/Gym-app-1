@@ -7,7 +7,7 @@ import Contact from "./pages/Contact";
 
 import AboutMe from "./pages/AboutMe";
 
-import Login from "./pages/Login";
+// import Login from "./pages/Login";
 // import PlaceOrder from "./pages/PlaceOrder";
 // import Orders from "./pages/Orders";
 import Navbar from "./components/Navbar";
