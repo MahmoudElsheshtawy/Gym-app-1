@@ -8,8 +8,8 @@ const contacts = [
       </svg>
     ),
     label: "WHATSAPP",
-    value: "https://wa.me/00000000000000",
-    href: "https://wa.me/00000000000000",
+    value: "https://wa.me/201558864839",
+    href: "https://wa.me/201558864839",
   },
   {
     icon: (
@@ -19,7 +19,7 @@ const contacts = [
     ),
     label: "INSTAGRAM",
     value: "@mohmmed nabil",
-    href: "https://instagram.com/mohmmed.nabil.792",
+    href: "https://www.instagram.com/mo_napil_22?igsh=bXM1Z3o3eG5sN2gy&utm_source=qr",
   },
   {
     icon: (
@@ -29,7 +29,7 @@ const contacts = [
     ),
     label: "FACEBOOK",
     value: "@mohmmed nabil",
-    href: "https://facebook.com/mohmmed.nabil.792",
+    href: "https://www.facebook.com/share/1LEiTjL4Ad/?mibextid=wwXIfr",
   },
   {
     icon: (

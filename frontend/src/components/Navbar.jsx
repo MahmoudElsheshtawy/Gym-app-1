@@ -1,25 +1,12 @@
 
-import { useContext, useState, useEffect } from "react";
+import {  useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { ShopContext } from "../context/ShopContext";
-import { toast } from "react-toastify";
+
 import { Dumbbell } from "lucide-react";
 
 const Navbar = () => {
   const [scrolling, setScrolling] = useState(false);
   const [open, setOpen] = useState(false);
-
-  const { navigate, token, setToken, setCartItems } =
-    useContext(ShopContext);
-
-  const logout = () => {
-    navigate("/login");
-    localStorage.removeItem("token");
-    localStorage.removeItem("cart");
-    setToken("");
-    setCartItems({});
-    toast.success("تم تسجيل الخروج بنجاح");
-  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,7 +27,7 @@ const Navbar = () => {
     { name: "Home", path: "/" },
     { name: "About", path: "/about-me" },
     { name: "Results", path: "/results-for-me" },
-    // { name: "Reviews", path: "/reviews" },
+
     { name: "Packages", path: "/packages" },
     { name: "Contact", path: "/Contact" },
   ];
@@ -73,8 +60,6 @@ const Navbar = () => {
               <NavLink
                 key={idx}
                 to={item.path}
-                onClick={scrollToTop()}
-
                 className="relative group hover:text-white transition"
               >
                 {item.name}
@@ -84,7 +69,7 @@ const Navbar = () => {
           </ul>
 
           {/* Actions */}
-          <div  className="flex items-center gap-4 text-white">
+          <div  onClick={ scrollToTop} className="flex items-center gap-4 text-white">
          
             <button
               onClick={() => setOpen(true)}
@@ -143,17 +128,7 @@ const Navbar = () => {
             </NavLink>
           ))}
 
-          {token && (
-            <button
-              onClick={() => {
-                logout();
-                setOpen(false);
-              }}
-              className="text-left text-red-400 mt-6"
-            >
-              Logout
-            </button>
-          )}
+
         </div>
       </div>
     </>

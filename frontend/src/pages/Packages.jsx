@@ -53,7 +53,7 @@ const features = [
 
 function PlanCard({ plan }) {
   const handleWhatsApp = () => {
-    const phone = "201093482958"; // 🔴 غير الرقم هنا
+    const phone = "201558864839"; // 🔴 غير الرقم هنا
 
     const message = `
 مرحباً كابتن،

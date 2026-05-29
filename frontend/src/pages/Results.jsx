@@ -4,6 +4,7 @@ import { assets } from "../assets/frontend_assets/assets";
 
 const slides = [
   { src: assets.bolbol },
+
   { src: assets.blog },
   { src: assets.home },
   { src: assets.blog },

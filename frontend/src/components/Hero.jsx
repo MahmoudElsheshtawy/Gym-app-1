@@ -138,9 +138,9 @@ export default function Hero() {
 
         {/* Social Icons */}
         <div className="flex justify-center gap-6 text-gray-500">
-          <FaInstagram className="text-2xl hover:text-white hover:scale-110 transition-all duration-300 cursor-pointer" />
-          <FaTiktok className="text-2xl hover:text-white hover:scale-110 transition-all duration-300 cursor-pointer" />
-          <FaFacebook className="text-2xl hover:text-white hover:scale-110 transition-all duration-300 cursor-pointer" />
+        <a href={'https://www.facebook.com/share/1LEiTjL4Ad/?mibextid=wwXIfr'}>  <FaFacebook  className="text-2xl hover:text-white hover:scale-110 transition-all duration-300 cursor-pointer" /></a>
+           <a href={'https://www.tiktok.com/@mohamed267_0?_r=1&_t=ZS-96ptQwU6T92'}> <FaTiktok className="text-2xl hover:text-white hover:scale-110 transition-all duration-300 cursor-pointer" /></a>
+         <a href={'https://www.instagram.com/mo_napil_22?igsh=bXM1Z3o3eG5sN2gy&utm_source=qr'}><FaInstagram className="text-2xl hover:text-white hover:scale-110 transition-all duration-300 cursor-pointer" /></a>
         </div>
       </div>
 

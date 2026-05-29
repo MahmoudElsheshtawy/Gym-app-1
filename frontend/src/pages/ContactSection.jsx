@@ -68,7 +68,7 @@ export default function ContactSection() {
           Online Coach
         </p>
 
-        <a href="https://wa.me/20000000000" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
+        <a href="https://wa.me/201558864839" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
           <button className="contact-btn">
             {/* Chat bubble icon */}
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
