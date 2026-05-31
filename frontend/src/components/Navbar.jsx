@@ -55,7 +55,7 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Links - pushed to far right with ml-auto */}
-          <ul  className="hidden text-lg sm:flex gap-8 text-white/80 ml-auto">
+          <ul onClick={ scrollToTop}  className="hidden text-lg sm:flex gap-8 text-white/80 ml-auto">
             {links.map((item, idx) => (
               <NavLink
                 key={idx}

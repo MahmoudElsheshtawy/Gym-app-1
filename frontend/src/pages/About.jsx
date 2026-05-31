@@ -1,4 +1,3 @@
-
 import { assets } from "../assets/frontend_assets/assets";
 
 export default function About() {
@@ -14,46 +13,38 @@ export default function About() {
       {/* Red side glow */}
       <div className="absolute left-0 top-0 h-full w-1 bg-[#e63946]/40 blur-sm" />
 
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-stretch">
 
-        {/* Image */}
+        {/* ================= IMAGE ================= */}
         <div className="relative flex justify-center md:justify-start">
-          {/* Red border glow frame */}
+
           <div
-            className="absolute inset-0 rounded-2xl"
-            style={{
-              background:
-                "linear-gradient(135deg, #e63946 0%, transparent 60%, #e63946 100%)",
-              padding: "2px",
-              borderRadius: "16px",
-            }}
-          />
-          <div
-            className="relative rounded-2xl overflow-hidden"
+            className="relative rounded-2xl overflow-hidden w-full h-full min-h-[420px]"
             style={{
               border: "2px solid #e63946",
-              boxShadow:
-                "0 0 30px rgba(230,57,70,0.35), inset 0 0 30px rgba(0,0,0,0.6)",
-              maxWidth: "420px",
-              width: "100%",
+              boxShadow: "0 0 30px rgba(230,57,70,0.35), inset 0 0 30px rgba(0,0,0,0.6)",
             }}
           >
             <img
               src={assets.bolbol}
               alt="Ahmed Shady"
-              className="w-full h-full object-cover"
-              style={{ display: "block", maxHeight: "560px", objectPosition: "center top" }}
+              className="w-full h-full object-cover object-top transition duration-500 hover:scale-105"
+              style={{ position: "absolute", inset: 0 }}
             />
-            {/* Dark overlay at bottom */}
-            <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black/80 to-transparent" />
+
+            {/* Fade top */}
+            <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-black/70 to-transparent" />
+
+            {/* Fade bottom */}
+            <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black/80 to-transparent" />
           </div>
         </div>
 
-        {/* Content */}
-        <div className="flex flex-col gap-6">
+        {/* ================= CONTENT ================= */}
+        <div className="flex flex-col gap-6 justify-center">
+
           {/* Tag */}
           <p
-          
             className="text-xs font-semibold tracking-[5px] uppercase"
             style={{ color: "#e63946" }}
           >
@@ -76,28 +67,30 @@ export default function About() {
 
           {/* Button */}
           <div>
-              <a href="https://wa.me/201558864839" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-
-                  <button
-                      className="px-8 py-3 rounded-xl font-bold text-white text-sm transition-all duration-300"
-                      style={{
-                          background: "#e63946",
-                          boxShadow: "0 0 20px rgba(230,57,70,0.4)",
-                      }}
-                      onMouseEnter={(e) =>
-                          (e.currentTarget.style.boxShadow =
-                              "0 0 35px rgba(230,57,70,0.75)")
-                      }
-                      onMouseLeave={(e) =>
-                          (e.currentTarget.style.boxShadow =
-                              "0 0 20px rgba(230,57,70,0.4)")
-                      }
-                  >
-
-                      Contact Me
-                  </button>
-              </a>
+            <a
+              href="https://wa.me/201558864839"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ textDecoration: "none" }}
+            >
+              <button
+                className="px-8 py-3 rounded-xl font-bold text-white text-sm transition-all duration-300"
+                style={{
+                  background: "#e63946",
+                  boxShadow: "0 0 20px rgba(230,57,70,0.4)",
+                }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.boxShadow = "0 0 35px rgba(230,57,70,0.75)")
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.boxShadow = "0 0 20px rgba(230,57,70,0.4)")
+                }
+              >
+                Contact Me
+              </button>
+            </a>
           </div>
+
         </div>
       </div>
 

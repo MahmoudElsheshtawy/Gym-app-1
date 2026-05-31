@@ -82,9 +82,7 @@ const Footer = () => {
                 <span className="text-white font-semibold text-sm">Opening Hours</span>
               </div>
               <div className="space-y-1 text-xs text-gray-300">
-                <p>Monday - Friday: 6:00 AM - 11:00 PM</p>
-                <p>Saturday: 8:00 AM - 10:00 PM</p>
-                <p>Sunday: 8:00 AM - 8:00 PM</p>
+                <p>Saturday  - Friday: 6:00 AM - 10:00 PM</p>
               </div>
             </div>
           </div>
@@ -142,8 +140,8 @@ const Footer = () => {
                 </div>
                 <div>
                   <p className="text-xs text-gray-400">Call Us</p>
-                  <a className="text-sm font-medium text-white hover:text-red-500 transition-colors">
-                    +20 10 9348 2958
+                  <a href="https://wa.me/201558864839" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-white hover:text-red-500 transition-colors">
+                    +20 155 886 4839
                   </a>
                 </div>
               </div>
@@ -154,8 +152,8 @@ const Footer = () => {
                 </div>
                 <div>
                   <p className="text-xs text-gray-400">Email Us</p>
-                  <a href="mailto:info@mohamednabilgym.com" className="text-sm font-medium text-white hover:text-red-500 transition-colors">
-                    info@mohamednabilgym.com
+                  <a href="mailto:mohamednapil@gmail.com" className="text-sm font-medium text-white hover:text-red-500 transition-colors">
+                    mohamednapil@gmail.com
                   </a>
                 </div>
               </div>
@@ -166,27 +164,23 @@ const Footer = () => {
                 </div>
                 <div>
                   <p className="text-xs text-gray-400">Visit Us</p>
-                  <p className="text-sm font-medium text-white">Cairo, Egypt - Nasr City</p>
+                  <p className="text-sm font-medium text-white"> El Nobaria, Al Buhayrah, Egypt</p>
                 </div>
               </div>
             </div>
-
+ 
             {/* Social Media Links */}
             <div className="pt-4">
               <p className="text-sm font-semibold text-white mb-3">Follow Us</p>
               <div className="flex gap-3">
-                <a href="#" className="p-2 bg-white/10 rounded-lg hover:bg-red-500 transition-all duration-300 hover:scale-110">
+                <a href="https://www.instagram.com/mo_napil_22?igsh=bXM1Z3o3eG5sN2gy&utm_source=qr/" target="_blank" rel="noopener noreferrer" className="p-2 bg-white/10 rounded-lg hover:bg-red-500 transition-all duration-300 hover:scale-110">
                   <Instagram className="w-5 h-5 text-white" />
+
                 </a>
-                <a href="#" className="p-2 bg-white/10 rounded-lg hover:bg-red-500 transition-all duration-300 hover:scale-110">
+                <a href="https://www.facebook.com/share/1LEiTjL4Ad/?mibextid=wwXIfr/" target="_blank" rel="noopener noreferrer" className="p-2 bg-white/10 rounded-lg hover:bg-red-500 transition-all duration-300 hover:scale-110">
                   <Facebook className="w-5 h-5 text-white" />
                 </a>
-                <a href="#" className="p-2 bg-white/10 rounded-lg hover:bg-red-500 transition-all duration-300 hover:scale-110">
-                  <Twitter className="w-5 h-5 text-white" />
-                </a>
-                <a href="#" className="p-2 bg-white/10 rounded-lg hover:bg-red-500 transition-all duration-300 hover:scale-110">
-                  <Youtube className="w-5 h-5 text-white" />
-                </a>
+               
               </div>
             </div>
           </div>
@@ -197,17 +191,17 @@ const Footer = () => {
           <div className="text-center">
             <div className="flex items-center justify-center gap-2 mb-2">
               <Users className="w-5 h-5 text-red-500" />
-              <span className="text-2xl font-bold text-white">5000+</span>
+              <span className="text-2xl font-bold text-white">100+</span>
             </div>
             <p className="text-xs text-gray-400">Happy Members</p>
           </div>
-          <div className="text-center">
-            <div className="flex items-center justify-center gap-2 mb-2">
-              <Award className="w-5 h-5 text-red-500" />
-              <span className="text-2xl font-bold text-white">50+</span>
-            </div>
-            <p className="text-xs text-gray-400">Expert Trainers</p>
-          </div>
+          {/* <div className="text-center"> */}
+            {/* <div className="flex items-center justify-center gap-2 mb-2"> */}
+              {/* <Award className="w-5 h-5 text-red-500" /> */}
+              {/* <span className="text-2xl font-bold text-white">50+</span> */}
+            {/* </div> */}
+            {/* <p className="text-xs text-gray-400">Expert Trainers</p> */}
+          {/* </div> */}
           <div className="text-center">
             <div className="flex items-center justify-center gap-2 mb-2">
               <Dumbbell className="w-5 h-5 text-red-500" />
@@ -218,7 +212,7 @@ const Footer = () => {
           <div className="text-center">
             <div className="flex items-center justify-center gap-2 mb-2">
               <Clock className="w-5 h-5 text-red-500" />
-              <span className="text-2xl font-bold text-white">10+</span>
+              <span className="text-2xl font-bold text-white">6+</span>
             </div>
             <p className="text-xs text-gray-400">Years Experience</p>
           </div>
@@ -238,20 +232,10 @@ const Footer = () => {
 
         {/* Bottom Bar */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm">
-          <p className="text-gray-500 text-xs sm:text-sm">
-            © {currentYear} Mohamed Nabil Gym. All rights reserved.
-          </p>
-          <div className="flex items-center gap-4">
-            <a href="#" className="text-gray-500 hover:text-red-500 transition-colors text-xs">
-              Privacy Policy
+        <a href=" https://wa.me/201093482958" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-red-500 transition-colors text-xs">
+             @{currentYear} Created by Mahmoud_Elsheshatwy
             </a>
-            <a href="#" className="text-gray-500 hover:text-red-500 transition-colors text-xs">
-              Terms of Service
-            </a>
-            <a href="#" className="text-gray-500 hover:text-red-500 transition-colors text-xs">
-              FAQ
-            </a>
-          </div>
+        
         </div>
       </footer>
 
