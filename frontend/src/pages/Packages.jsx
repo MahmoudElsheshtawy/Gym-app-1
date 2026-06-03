@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const plans = [
   {
@@ -51,10 +51,42 @@ const features = [
   { icon: "💬", title: "واتساب", desc: "دعم مباشر 24/7" },
 ];
 
-function PlanCard({ plan }) {
-  const handleWhatsApp = () => {
-    const phone = "201558864839"; // 🔴 غير الرقم هنا
+const ACCENT = "#FFC107";
 
+function useReveal() {
+  const ref = useRef(null);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const obs = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) { setVisible(true); obs.disconnect(); } },
+      { threshold: 0.15 }
+    );
+    if (ref.current) obs.observe(ref.current);
+    return () => obs.disconnect();
+  }, []);
+  return [ref, visible];
+}
+
+function Reveal({ children, delay = 0, className = "" }) {
+  const [ref, visible] = useReveal();
+  return (
+    <div
+      ref={ref}
+      className={className}
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(24px)",
+        transition: `opacity 0.6s ease ${delay}ms, transform 0.6s ease ${delay}ms`,
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
+function PlanCard({ plan, delay }) {
+  const handleWhatsApp = () => {
+    const phone = "201558864839";
     const message = `
 مرحباً كابتن،
 
@@ -66,63 +98,75 @@ function PlanCard({ plan }) {
 📋 المميزات:
 ${plan.features.map((f) => `✔ ${f}`).join("\n")}
     `;
-
     const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-
     window.open(url, "_blank");
   };
 
   return (
-    <div
-      className={`relative rounded-2xl p-4 sm:p-5 border transition-all duration-300 hover:scale-[1.02] hover:shadow-xl
-      ${
-        plan.featured
-          ? "border-red-500 bg-gradient-to-br from-red-500/15 to-red-500/5 shadow-red-500/10"
-          : "border-white/10 bg-white/5 hover:border-red-500/30"
-      }`}
-    >
-      {plan.featured && (
-        <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-red-600 to-red-500 text-white text-[11px] sm:text-xs px-3 py-1 rounded-full font-bold shadow-lg whitespace-nowrap">
-          🔥 BEST VALUE
-        </div>
-      )}
-
-      <h3 className="text-white font-bold text-base sm:text-lg mb-2">{plan.name}</h3>
-
-      <div className="mt-2">
-        <span className="text-2xl sm:text-3xl font-black text-white">{plan.price}</span>
-        <span className="text-xs sm:text-sm text-white/50 font-normal"> LE</span>
-        <span className="text-[10px] sm:text-xs text-white/40 ml-1">{plan.period}</span>
-      </div>
-
-      {plan.note && (
-        <p className="text-red-400 text-[11px] sm:text-xs mt-2 font-semibold">{plan.note}</p>
-      )}
-
-      <div className="border-t border-white/10 my-3 sm:my-4"></div>
-
-      <div className="space-y-2 min-h-[120px] sm:min-h-[140px]">
-        {plan.features.map((f, i) => (
-          <div key={i} className="text-white/70 text-xs sm:text-sm flex gap-2 items-start">
-            <span className="text-red-500 text-xs sm:text-sm mt-0.5 flex-shrink-0">✓</span>
-            <span className="flex-1 leading-relaxed">{f}</span>
-          </div>
-        ))}
-      </div>
-
-      {/* ✅ هنا التعديل */}
-      <button
-        onClick={handleWhatsApp}
-        className={`w-full mt-4 sm:mt-5 py-2 sm:py-2.5 rounded-lg font-bold transition-all duration-300
-        ${
+    <Reveal delay={delay}>
+      <div
+        className="relative rounded-2xl p-4 sm:p-5 border transition-all duration-300 hover:scale-[1.02] hover:shadow-xl"
+        style={
           plan.featured
-            ? "bg-gradient-to-r from-red-600 to-red-500 hover:from-red-700 hover:to-red-600 shadow-lg shadow-red-500/30"
-            : "border border-red-500 text-red-500 hover:bg-red-500 hover:text-white"
-        }`}
+            ? { borderColor: ACCENT, background: "linear-gradient(135deg, rgba(255,193,7,0.12), rgba(255,193,7,0.03))" }
+            : { borderColor: "rgba(255,255,255,0.1)", background: "rgba(255,255,255,0.05)" }
+        }
+        onMouseEnter={(e) => { if (!plan.featured) e.currentTarget.style.borderColor = "rgba(255,193,7,0.35)"; }}
+        onMouseLeave={(e) => { if (!plan.featured) e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"; }}
       >
-        اشترك الآن
-      </button>
-    </div>
+        {plan.featured && (
+          <div
+            className="absolute -top-3 left-1/2 -translate-x-1/2 text-[11px] sm:text-xs px-3 py-1 rounded-full font-bold whitespace-nowrap"
+            style={{ background: ACCENT, color: "#1a1300" }}
+          >
+            🔥 BEST VALUE
+          </div>
+        )}
+
+        <h3 className="text-white font-bold text-base sm:text-lg mb-2">{plan.name}</h3>
+
+        <div className="mt-2">
+          <span className="text-2xl sm:text-3xl font-black text-white">{plan.price}</span>
+          <span className="text-xs sm:text-sm text-white/50 font-normal"> LE</span>
+          <span className="text-[10px] sm:text-xs text-white/40 ml-1">{plan.period}</span>
+        </div>
+
+        {plan.note && (
+          <p className="text-[11px] sm:text-xs mt-2 font-semibold" style={{ color: ACCENT }}>{plan.note}</p>
+        )}
+
+        <div className="border-t border-white/10 my-3 sm:my-4"></div>
+
+        <div className="space-y-2 min-h-[120px] sm:min-h-[140px]">
+          {plan.features.map((f, i) => (
+            <div key={i} className="text-white/70 text-xs sm:text-sm flex gap-2 items-start">
+              <span className="text-xs sm:text-sm mt-0.5 flex-shrink-0" style={{ color: ACCENT }}>✓</span>
+              <span className="flex-1 leading-relaxed">{f}</span>
+            </div>
+          ))}
+        </div>
+
+        <button
+          onClick={handleWhatsApp}
+          className="w-full mt-4 sm:mt-5 py-2 sm:py-2.5 rounded-lg font-bold transition-all duration-300"
+          style={
+            plan.featured
+              ? { background: ACCENT, color: "#1a1300" }
+              : { border: `1px solid ${ACCENT}`, color: ACCENT, background: "transparent" }
+          }
+          onMouseEnter={(e) => {
+            if (!plan.featured) { e.currentTarget.style.background = ACCENT; e.currentTarget.style.color = "#1a1300"; }
+            else { e.currentTarget.style.opacity = "0.88"; }
+          }}
+          onMouseLeave={(e) => {
+            if (!plan.featured) { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = ACCENT; }
+            else { e.currentTarget.style.opacity = "1"; }
+          }}
+        >
+          اشترك الآن
+        </button>
+      </div>
+    </Reveal>
   );
 }
 
@@ -130,73 +174,84 @@ export default function Packages() {
   return (
     <div className="bg-gradient-to-b from-[#050505] to-[#0a0a0a] text-white min-h-screen px-4 sm:px-6 lg:px-20 pt-28 pb-16 font-[Cairo]">
 
-      {/* Title Section with top spacing */}
-      <div className="text-center mb-12">
-        <div className="inline-block mb-4">
-          <div className="flex justify-center">
-            <div className="w-16 h-1 bg-red-500 rounded-full"></div>
+      {/* Title Section */}
+      <Reveal>
+        <div className="text-center mb-12">
+          <div className="flex justify-center mb-4">
+            <div className="w-16 h-1 rounded-full" style={{ background: ACCENT }}></div>
           </div>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-black mb-3 tracking-tight">
+            CHOOSE YOUR <span style={{ color: ACCENT }}>PACKAGE</span>
+          </h1>
+          <p className="text-white/50 text-sm max-w-md mx-auto">
+            عروض تدريب أونلاين احترافية تناسب أهدافك
+          </p>
         </div>
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-black mb-3 tracking-tight">
-          CHOOSE YOUR <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-600">PACKAGE</span>
-        </h1>
-        <p className="text-white/50 text-sm max-w-md mx-auto">
-          عروض تدريب أونلاين احترافية تناسب أهدافك
-        </p>
-      </div>
+      </Reveal>
 
-      {/* FEATURES - Responsive Grid */}
+      {/* FEATURES */}
       <div className="mb-14">
-        <h2 className="text-center text-lg sm:text-xl font-bold mb-6 text-white/80">
-          <span className="text-red-500">★</span> المميزات <span className="text-red-500">★</span>
-        </h2>
+        <Reveal delay={100}>
+          <h2 className="text-center text-lg sm:text-xl font-bold mb-6 text-white/80">
+            <span style={{ color: ACCENT }}>★</span> المميزات <span style={{ color: ACCENT }}>★</span>
+          </h2>
+        </Reveal>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
           {features.map((f, i) => (
-            <div
-              key={i}
-              className="bg-white/5 border border-white/10 rounded-xl p-3 sm:p-4 text-center hover:bg-white/10 transition-all duration-300 hover:scale-105 hover:border-red-500/30 cursor-pointer group"
-            >
-              <div className="text-xl sm:text-2xl mb-2 group-hover:scale-110 transition-transform duration-300">{f.icon}</div>
-              <h4 className="text-white font-bold text-xs sm:text-sm">{f.title}</h4>
-              <p className="text-white/50 text-[10px] sm:text-xs mt-1 leading-relaxed">{f.desc}</p>
-            </div>
+            <Reveal key={i} delay={150 + i * 60}>
+              <div
+                className="bg-white/5 border border-white/10 rounded-xl p-3 sm:p-4 text-center transition-all duration-300 hover:scale-105 cursor-pointer group"
+                onMouseEnter={(e) => { e.currentTarget.style.borderColor = "rgba(255,193,7,0.3)"; e.currentTarget.style.background = "rgba(255,255,255,0.1)"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"; e.currentTarget.style.background = "rgba(255,255,255,0.05)"; }}
+              >
+                <div className="text-xl sm:text-2xl mb-2 group-hover:scale-110 transition-transform duration-300">{f.icon}</div>
+                <h4 className="text-white font-bold text-xs sm:text-sm">{f.title}</h4>
+                <p className="text-white/50 text-[10px] sm:text-xs mt-1 leading-relaxed">{f.desc}</p>
+              </div>
+            </Reveal>
           ))}
         </div>
       </div>
 
       {/* PLANS Section 1 */}
       <div className="mb-10">
-        <h2 className="text-center text-base sm:text-lg font-semibold mb-5 text-white/70">
-          🎯 باقات البداية
-        </h2>
+        <Reveal>
+          <h2 className="text-center text-base sm:text-lg font-semibold mb-5 text-white/70">
+            🎯 باقات البداية
+          </h2>
+        </Reveal>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
           {plans.map((p, i) => (
-            <PlanCard key={i} plan={p} />
+            <PlanCard key={i} plan={p} delay={i * 100} />
           ))}
         </div>
       </div>
 
       {/* PLANS Section 2 */}
       <div>
-        <h2 className="text-center text-base sm:text-lg font-semibold mb-5 text-white/70">
-          ⭐ عروض خاصة
-        </h2>
+        <Reveal>
+          <h2 className="text-center text-base sm:text-lg font-semibold mb-5 text-white/70">
+            ⭐ عروض خاصة
+          </h2>
+        </Reveal>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
           {plans2.map((p, i) => (
-            <PlanCard key={i} plan={p} />
+            <PlanCard key={i} plan={p} delay={i * 100} />
           ))}
         </div>
       </div>
 
       {/* Bottom Trust Badge */}
-      <div className="text-center pt-10 mt-6 border-t border-white/10">
-        <div className="flex flex-wrap justify-center gap-4 sm:gap-6 text-[10px] sm:text-xs text-white/40">
-          <span className="flex items-center gap-1">✅ دعم فني 24/7</span>
-          <span className="flex items-center gap-1">🔄 إلغاء في أي وقت</span>
-          <span className="flex items-center gap-1">🔒 دفع آمن</span>
-          <span className="flex items-center gap-1">📱 متابعة عبر واتساب</span>
+      <Reveal>
+        <div className="text-center pt-10 mt-6 border-t border-white/10">
+          <div className="flex flex-wrap justify-center gap-4 sm:gap-6 text-[10px] sm:text-xs text-white/40">
+            <span className="flex items-center gap-1">✅ دعم فني 24/7</span>
+            <span className="flex items-center gap-1">🔄 إلغاء في أي وقت</span>
+            <span className="flex items-center gap-1">🔒 دفع آمن</span>
+            <span className="flex items-center gap-1">📱 متابعة عبر واتساب</span>
+          </div>
         </div>
-      </div>
+      </Reveal>
     </div>
   );
 }

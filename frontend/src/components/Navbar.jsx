@@ -1,8 +1,9 @@
-
-import {  useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 
 import { Dumbbell } from "lucide-react";
+
+const ACCENT = "#FFC107";
 
 const Navbar = () => {
   const [scrolling, setScrolling] = useState(false);
@@ -16,10 +17,11 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-   const scrollToTop = () => {
+
+  const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth"
+      behavior: "smooth",
     });
   };
 
@@ -27,9 +29,9 @@ const Navbar = () => {
     { name: "Home", path: "/" },
     { name: "About", path: "/about-me" },
     { name: "Results", path: "/results-for-me" },
-
     { name: "Packages", path: "/packages" },
-    { name: "Contact", path: "/Contact" },
+    { name: "Contact", path: "/contact" },
+    { name: "Calories Calculator", path: "/calories-calculator" }
   ];
 
   return (
@@ -45,17 +47,20 @@ const Navbar = () => {
         <div className="flex items-center justify-between py-5 px-4 sm:px-[3%]">
 
           {/* Logo with Icon */}
-          <Link  onClick={scrollToTop} to="/" className="flex items-center gap-2 group">
-            <div  className="p-1.5 bg-gradient-to-br from-red-600 to-red-700 rounded-xl shadow-lg shadow-red-500/20 group-hover:shadow-red-500/40 transition-all duration-300">
-              <Dumbbell className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+          <Link onClick={scrollToTop} to="/" className="flex items-center gap-2 group">
+            <div
+              className="p-1.5 rounded-xl shadow-lg transition-all duration-300"
+              style={{ background: ACCENT, boxShadow: "0 0 16px rgba(255,193,7,0.25)" }}
+            >
+              <Dumbbell className="w-5 h-5 sm:w-6 sm:h-6" style={{ color: "#1a1300" }} />
             </div>
-            <h1  className="text-white text-xl sm:text-2xl md:text-3xl font-extrabold tracking-wide">
+            <h1 className="text-white text-xl sm:text-2xl md:text-3xl font-extrabold tracking-wide">
               Mo Nabil
             </h1>
           </Link>
 
-          {/* Desktop Links - pushed to far right with ml-auto */}
-          <ul onClick={ scrollToTop}  className="hidden text-lg sm:flex gap-8 text-white/80 ml-auto">
+          {/* Desktop Links */}
+          <ul onClick={scrollToTop} className="hidden text-lg sm:flex gap-8 text-white/80 ml-auto">
             {links.map((item, idx) => (
               <NavLink
                 key={idx}
@@ -63,14 +68,16 @@ const Navbar = () => {
                 className="relative group hover:text-white transition"
               >
                 {item.name}
-                <span className="absolute left-0 bottom-0 w-full h-[2px] bg-white scale-x-0 group-hover:scale-x-100 transition origin-left"></span>
+                <span
+                  className="absolute left-0 bottom-0 w-full h-[2px] scale-x-0 group-hover:scale-x-100 transition origin-left"
+                  style={{ background: ACCENT }}
+                ></span>
               </NavLink>
             ))}
           </ul>
 
           {/* Actions */}
-          <div  onClick={ scrollToTop} className="flex items-center gap-4 text-white">
-         
+          <div onClick={scrollToTop} className="flex items-center gap-4 text-white">
             <button
               onClick={() => setOpen(true)}
               className="sm:hidden text-2xl"
@@ -109,8 +116,8 @@ const Navbar = () => {
 
         {/* Mobile Logo */}
         <div className="flex items-center justify-center gap-2 mb-8">
-          <div className="p-1.5 bg-gradient-to-br from-red-600 to-red-700 rounded-xl">
-            <Dumbbell className="w-5 h-5 text-white" />
+          <div className="p-1.5 rounded-xl" style={{ background: ACCENT }}>
+            <Dumbbell className="w-5 h-5" style={{ color: "#1a1300" }} />
           </div>
           <h1 className="text-white text-xl font-extrabold">Mo Nabil</h1>
         </div>
@@ -127,8 +134,6 @@ const Navbar = () => {
               {item.name}
             </NavLink>
           ))}
-
-
         </div>
       </div>
     </>

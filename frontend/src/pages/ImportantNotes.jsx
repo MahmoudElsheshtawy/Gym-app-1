@@ -9,6 +9,8 @@ const notes = [
   },
 ];
 
+const ACCENT = "#FFC107";
+
 export default function ImportantNotes() {
   return (
     <div style={{
@@ -25,18 +27,18 @@ export default function ImportantNotes() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap');
         .note-card { transition: border-color 0.25s, box-shadow 0.25s; }
-        .note-card:hover { border-color: #e63946 !important; box-shadow: 0 0 18px rgba(230,57,70,0.15); }
+        .note-card:hover { border-color: ${ACCENT} !important; box-shadow: 0 0 18px rgba(255,193,7,0.15); }
       `}</style>
 
-      {/* Top red line */}
-      <div style={{ position: "fixed", top: 0, left: 0, right: 0, height: 2, background: "linear-gradient(90deg,transparent,#e63946,transparent)" }} />
+      {/* Top yellow line */}
+      <div style={{ position: "fixed", top: 0, left: 0, right: 0, height: 2, background: `linear-gradient(90deg,transparent,${ACCENT},transparent)` }} />
 
       {/* Title */}
       <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: "2.5rem" }}>
-        <span style={{ color: "#e63946", fontSize: 22 }}>ⓘ</span>
+        <span style={{ color: ACCENT, fontSize: 22 }}>ⓘ</span>
         <h1 style={{ margin: 0, fontSize: "clamp(22px,5vw,36px)", fontWeight: 900, letterSpacing: 3, textTransform: "uppercase" }}>
           <span style={{ color: "#fff" }}>IMPORTANT </span>
-          <span style={{ color: "#e63946" }}>NOTES</span>
+          <span style={{ color: ACCENT }}>NOTES</span>
         </h1>
       </div>
 
@@ -45,7 +47,7 @@ export default function ImportantNotes() {
 
         {/* Biohazard icon + dash */}
         <div style={{ textAlign: "center", fontSize: 28, marginBottom: 8 }}>
-          ☣️ <span style={{ color: "#e63946", fontWeight: 900, fontSize: 20 }}>:-</span>
+          ☣️ <span style={{ color: ACCENT, fontWeight: 900, fontSize: 20 }}>:-</span>
         </div>
 
         {notes.map((note, i) => (
@@ -67,14 +69,14 @@ export default function ImportantNotes() {
               flexShrink: 0,
               width: 26,
               height: 26,
-              background: "#1565c0",
+              background: ACCENT,
               borderRadius: 6,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               fontSize: 13,
               fontWeight: 900,
-              color: "#fff",
+              color: "#1a1300",
               marginTop: 2,
             }}>
               {note.num}

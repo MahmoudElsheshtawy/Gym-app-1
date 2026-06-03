@@ -10,13 +10,13 @@ export default function ContactSection() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Bebas+Neue&display=swap');
         @keyframes glowPulse {
-          0%, 100% { opacity: 0.6; box-shadow: 0 0 12px 2px #e63946; }
-          50%       { opacity: 1;   box-shadow: 0 0 32px 8px #e63946; }
+          0%, 100% { opacity: 0.6; box-shadow: 0 0 12px 2px #FFC107; }
+          50%       { opacity: 1;   box-shadow: 0 0 32px 8px #FFC107; }
         }
         .contact-btn {
-          background: #e63946;
+          background: #FFC107;
           border: none;
-          color: #fff;
+          color: #1a1300;
           border-radius: 50px;
           padding: 14px 40px;
           font-size: 17px;
@@ -27,39 +27,39 @@ export default function ContactSection() {
           align-items: center;
           gap: 10px;
           transition: transform 0.2s, box-shadow 0.2s;
-          box-shadow: 0 0 20px rgba(230,57,70,0.4);
+          box-shadow: 0 0 20px rgba(255,193,7,0.4);
         }
         .contact-btn:hover {
           transform: scale(1.05);
-          box-shadow: 0 0 36px rgba(230,57,70,0.7);
+          box-shadow: 0 0 36px rgba(255,193,7,0.7);
         }
       `}</style>
 
       {/* Top empty dark space */}
       <div style={{ flex: 1, minHeight: 120 }} />
 
-      {/* Glowing red divider line */}
+      {/* Glowing yellow divider line */}
       <div style={{
         width: "100%",
         height: 2,
-        background: "linear-gradient(90deg, transparent 0%, #e63946 20%, #ff1a2e 50%, #e63946 80%, transparent 100%)",
+        background: "linear-gradient(90deg, transparent 0%, #FFC107 20%, #ffdb70 50%, #FFC107 80%, transparent 100%)",
         animation: "glowPulse 2.5s ease-in-out infinite",
         marginBottom: 60,
       }} />
 
       {/* Content */}
       <div style={{ textAlign: "center", padding: "0 1rem 80px" }}>
-        <p style={{ color: "#e63946", fontSize: 13, letterSpacing: 5, textTransform: "uppercase", marginBottom: 12 }}>
+        <p style={{ color: "#FFC107", fontSize: 13, letterSpacing: 5, textTransform: "uppercase", marginBottom: 12 }}>
           GET IN TOUCH
         </p>
 
         <h1 style={{
           fontFamily: "'Bebas Neue', sans-serif",
           fontSize: "clamp(56px, 12vw, 100px)",
-          color: "#e63946",
+          color: "#FFC107",
           letterSpacing: 8,
           margin: "0 0 4px",
-          textShadow: "0 0 40px rgba(230,57,70,0.5)",
+          textShadow: "0 0 40px rgba(255,193,7,0.5)",
         }}>
           elpolpol
         </h1>
@@ -79,11 +79,11 @@ export default function ContactSection() {
         </a>
       </div>
 
-      {/* Bottom red line */}
+      {/* Bottom yellow line */}
       <div style={{
         width: "100%",
         height: 2,
-        background: "linear-gradient(90deg, transparent 0%, #e63946 20%, #ff1a2e 50%, #e63946 80%, transparent 100%)",
+        background: "linear-gradient(90deg, transparent 0%, #FFC107 20%, #ffdb70 50%, #FFC107 80%, transparent 100%)",
         opacity: 0.4,
       }} />
     </div>

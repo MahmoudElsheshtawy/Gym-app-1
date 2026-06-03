@@ -7,11 +7,11 @@ export default function About() {
       {/* Top red line */}
       <div
         className="absolute top-0 left-0 w-full h-[2px]"
-        style={{ background: "linear-gradient(to right, #e63946, transparent)" }}
+        style={{ background: "linear-gradient(to right, #FFC107, transparent)" }}
       />
 
       {/* Red side glow */}
-      <div className="absolute left-0 top-0 h-full w-1 bg-[#e63946]/40 blur-sm" />
+      <div className="absolute left-0 top-0 h-full w-1 bg-[#FFC107]/40 blur-sm" />
 
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-stretch">
 
@@ -21,8 +21,8 @@ export default function About() {
           <div
             className="relative rounded-2xl overflow-hidden w-full h-full min-h-[420px]"
             style={{
-              border: "2px solid #e63946",
-              boxShadow: "0 0 30px rgba(230,57,70,0.35), inset 0 0 30px rgba(0,0,0,0.6)",
+              border: "2px solid #FFC107",
+              boxShadow: "0 0 30px rgba(255,193,7,0.35), inset 0 0 30px rgba(0,0,0,0.6)",
             }}
           >
             <img
@@ -46,7 +46,7 @@ export default function About() {
           {/* Tag */}
           <p
             className="text-xs font-semibold tracking-[5px] uppercase"
-            style={{ color: "#e63946" }}
+            style={{ color: "#FFC107" }}
           >
             About Me
           </p>
@@ -54,7 +54,7 @@ export default function About() {
           {/* Heading */}
           <h2 className="text-4xl sm:text-5xl font-black uppercase leading-tight">
             <span className="text-white">ONLINE </span>
-            <span style={{ color: "#e63946" }}>COACH</span>
+            <span style={{ color: "#FFC107" }}>COACH</span>
           </h2>
 
           {/* Description */}
@@ -76,14 +76,14 @@ export default function About() {
               <button
                 className="px-8 py-3 rounded-xl font-bold text-white text-sm transition-all duration-300"
                 style={{
-                  background: "#e63946",
-                  boxShadow: "0 0 20px rgba(230,57,70,0.4)",
+                  background: "#FFC107",
+                  boxShadow: "0 0 20px rgba(255,193,7,0.4)",
                 }}
                 onMouseEnter={(e) =>
-                  (e.currentTarget.style.boxShadow = "0 0 35px rgba(230,57,70,0.75)")
+                  (e.currentTarget.style.boxShadow = "0 0 35px rgba(255,193,7,0.75)")
                 }
                 onMouseLeave={(e) =>
-                  (e.currentTarget.style.boxShadow = "0 0 20px rgba(230,57,70,0.4)")
+                  (e.currentTarget.style.boxShadow = "0 0 20px rgba(255,193,7,0.4)")
                 }
               >
                 Contact Me
@@ -97,7 +97,7 @@ export default function About() {
       {/* Bottom red line */}
       <div
         className="absolute bottom-0 right-0 w-full h-[2px]"
-        style={{ background: "linear-gradient(to left, #e63946, transparent)" }}
+        style={{ background: "linear-gradient(to left, #FFC107, transparent)" }}
       />
     </section>
   );

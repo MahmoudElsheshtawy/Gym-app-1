@@ -1,6 +1,5 @@
 import { useEffect, useRef } from "react";
 import { FaInstagram, FaTiktok, FaFacebook } from "react-icons/fa";
-import About from "../pages/About";
 import { Link } from "react-router-dom";
 
 export default function Hero() {
@@ -26,7 +25,7 @@ export default function Hero() {
       vx: (Math.random() - 0.5) * 0.4,
       vy: (Math.random() - 0.5) * 0.4,
       alpha: Math.random() * 0.5 + 0.1,
-      red: Math.random() < 0.12,
+      accent: Math.random() < 0.12,
     }));
 
     const draw = () => {
@@ -42,8 +41,8 @@ export default function Hero() {
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = p.red
-          ? `rgba(230,57,70,${p.alpha})`
+        ctx.fillStyle = p.accent
+          ? `rgba(255,193,7,${p.alpha})`
           : `rgba(255,255,255,${p.alpha})`;
         ctx.fill();
       }
@@ -88,7 +87,7 @@ export default function Hero() {
       <div className="relative z-10 text-center max-w-3xl mx-auto">
 
         {/* Tag */}
-        <p className="tracking-[6px] text-[#e63946] mb-4 text-xs sm:text-sm font-semibold uppercase">
+        <p className="tracking-[6px] text-[#FFC107] mb-4 text-xs sm:text-sm font-semibold uppercase">
           Online Fitness Coach
         </p>
 
@@ -96,13 +95,13 @@ export default function Hero() {
         <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-tight mb-4 uppercase">
           <span className="text-white">I'M </span>
           <span
-            className="text-[#e63946]"
+            className="text-[#FFC107]"
             style={{
               textShadow:
-                "0 0 30px rgba(230,57,70,0.8), 0 0 60px rgba(230,57,70,0.4)",
+                "0 0 30px rgba(255,193,7,0.6), 0 0 60px rgba(255,193,7,0.3)",
             }}
           >
-           Mohammed Nabil
+            Mohammed Nabil
           </span>
         </h1>
 
@@ -113,45 +112,51 @@ export default function Hero() {
 
         {/* Buttons */}
         <div className="flex flex-col sm:flex-row justify-center gap-4 mb-10">
-          <Link to="/results-for-me" className="px-7 py-3 rounded-xl text-white font-bold text-sm transition-all duration-300"
-            className="px-7 py-3 rounded-xl text-white font-bold text-sm transition-all duration-300"
+          <Link
+            to="/results-for-me"
+            className="px-7 py-3 rounded-xl text-black font-bold text-sm transition-all duration-300"
             style={{
-              background: "#e63946",
-              boxShadow: "0 0 20px rgba(230,57,70,0.5)",
+              background: "#FFC107",
+              boxShadow: "0 0 20px rgba(255,193,7,0.5)",
             }}
             onMouseEnter={(e) =>
-              (e.currentTarget.style.boxShadow =
-                "0 0 35px rgba(230,57,70,0.8)")
+              (e.currentTarget.style.boxShadow = "0 0 35px rgba(255,193,7,0.8)")
             }
             onMouseLeave={(e) =>
-              (e.currentTarget.style.boxShadow =
-                "0 0 20px rgba(230,57,70,0.5)")
+              (e.currentTarget.style.boxShadow = "0 0 20px rgba(255,193,7,0.5)")
             }
-         
           >
             My Transformations
           </Link>
-          <Link to="/contact" className="px-7 py-3 rounded-xl text-white font-bold text-sm border border-[#444] hover:border-[#e63946] transition-all duration-300 bg-transparent">
+          <Link
+            to="/contact"
+            className="px-7 py-3 rounded-xl text-white font-bold text-sm border border-[#444] hover:border-[#FFC107] transition-all duration-300 bg-transparent"
+          >
             Get Started
           </Link>
         </div>
 
         {/* Social Icons */}
         <div className="flex justify-center gap-6 text-gray-500">
-        <a href={'https://www.facebook.com/share/1LEiTjL4Ad/?mibextid=wwXIfr'}>  <FaFacebook  className="text-2xl hover:text-white hover:scale-110 transition-all duration-300 cursor-pointer" /></a>
-           <a href={'https://www.tiktok.com/@mohamed267_0?_r=1&_t=ZS-96ptQwU6T92'}> <FaTiktok className="text-2xl hover:text-white hover:scale-110 transition-all duration-300 cursor-pointer" /></a>
-         <a href={'https://www.instagram.com/mo_napil_22?igsh=bXM1Z3o3eG5sN2gy&utm_source=qr'}><FaInstagram className="text-2xl hover:text-white hover:scale-110 transition-all duration-300 cursor-pointer" /></a>
+          <a href="https://www.facebook.com/share/1LEiTjL4Ad/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">
+            <FaFacebook className="text-2xl hover:text-white hover:scale-110 transition-all duration-300 cursor-pointer" />
+          </a>
+          <a href="https://www.tiktok.com/@mohamed267_0?_r=1&_t=ZS-96ptQwU6T92" target="_blank" rel="noopener noreferrer">
+            <FaTiktok className="text-2xl hover:text-white hover:scale-110 transition-all duration-300 cursor-pointer" />
+          </a>
+          <a href="https://www.instagram.com/mo_napil_22?igsh=bXM1Z3o3eG5sN2gy&utm_source=qr" target="_blank" rel="noopener noreferrer">
+            <FaInstagram className="text-2xl hover:text-white hover:scale-110 transition-all duration-300 cursor-pointer" />
+          </a>
         </div>
       </div>
 
       {/* Scroll Indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce z-10">
         <div className="w-7 h-11 border-2 border-[#444] rounded-full flex justify-center pt-2">
-          <div className="w-1.5 h-2.5 bg-[#e63946] rounded-full" />
+          <div className="w-1.5 h-2.5 bg-[#FFC107] rounded-full" />
         </div>
       </div>
-      
+
     </section>
-    
   );
 }

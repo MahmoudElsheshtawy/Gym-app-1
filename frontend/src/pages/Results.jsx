@@ -1,10 +1,8 @@
-
 import { useState, useRef, useEffect, useCallback } from "react";
 import { assets } from "../assets/frontend_assets/assets";
 
 const slides = [
   { src: assets.bolbol },
-
   { src: assets.blog },
   { src: assets.home },
   { src: assets.blog },
@@ -13,10 +11,11 @@ const slides = [
   { src: assets.bolbol },
   { src: assets.home },
   { src: assets.b },
-
 ];
 
 const TOTAL = slides.length;
+const ACCENT = "#FFC107";
+const AUTOPLAY_MS = 4000;
 
 function LazyImg({ src }) {
   const ref = useRef(null);
@@ -62,17 +61,45 @@ export default function ClientTransformations() {
   const [idx, setIdx] = useState(0);
   const [modal, setModal] = useState(false);
   const [grabbing, setGrabbing] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const [paused, setPaused] = useState(false);
   const lockRef = useRef(false);
   const trackRef = useRef(null);
+  const sectionRef = useRef(null);
   const startXRef = useRef(null);
   const isDragRef = useRef(false);
   const dragMovedRef = useRef(false);
+  const autoplayRef = useRef(null);
+
+  useEffect(() => {
+    const t = setTimeout(() => setMounted(true), 60);
+    return () => clearTimeout(t);
+  }, []);
 
   const go = useCallback((dir) => {
     if (lockRef.current) return;
     lockRef.current = true;
     setIdx((p) => (p + dir + TOTAL) % TOTAL);
     setTimeout(() => { lockRef.current = false; }, 450);
+  }, []);
+
+  // autoplay — pause on hover/drag/modal, resume in view only
+  useEffect(() => {
+    if (paused || modal) return;
+    autoplayRef.current = setInterval(() => go(1), AUTOPLAY_MS);
+    return () => clearInterval(autoplayRef.current);
+  }, [paused, modal, go]);
+
+  // pause autoplay when section is out of view
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([e]) => setPaused(!e.isIntersecting),
+      { threshold: 0.2 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
   }, []);
 
   // wheel
@@ -145,21 +172,35 @@ export default function ClientTransformations() {
   };
 
   return (
-    <div style={{ background: "#0a0a0a", color: "#fff", fontFamily: "'Bebas Neue','Cairo',sans-serif", paddingBottom: "3rem" }}>
+    <div
+      ref={sectionRef}
+      style={{ background: "#0a0a0a", color: "#fff", fontFamily: "'Bebas Neue','Cairo',sans-serif", paddingBottom: "3rem" }}
+    >
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cairo:wght@400;700&display=swap');
         @keyframes shimmer { 0%{background-position:100% 0} 100%{background-position:-100% 0} }
         @keyframes fadeSlide { from{opacity:0;transform:translateY(8px) scale(0.97)} to{opacity:1;transform:translateY(0) scale(1)} }
         @keyframes modalIn { from{opacity:0;transform:scale(0.95)} to{opacity:1;transform:scale(1)} }
+        @keyframes riseIn { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+        .anim-rise { opacity: 0; }
+        .anim-rise.mounted { animation: riseIn 0.6s ease forwards; }
         * { box-sizing: border-box; }
       `}</style>
 
       {/* Header */}
       <div style={{ textAlign: "center", padding: "3rem 1rem 2rem" }}>
-        <p style={{ color: "#e63946", fontSize: 11, letterSpacing: 6, margin: "0 0 8px", textTransform: "uppercase" }}>RESULTS</p>
-        <h2 style={{ margin: 0, fontSize: "clamp(28px,5.5vw,68px)", fontFamily: "'Bebas Neue',sans-serif", letterSpacing: 2, lineHeight: 1 }}>
+        <p
+          className={`anim-rise ${mounted ? "mounted" : ""}`}
+          style={{ color: ACCENT, fontSize: 11, letterSpacing: 6, margin: "0 0 8px", textTransform: "uppercase", animationDelay: "0ms" }}
+        >
+          RESULTS
+        </p>
+        <h2
+          className={`anim-rise ${mounted ? "mounted" : ""}`}
+          style={{ margin: 0, fontSize: "clamp(28px,5.5vw,68px)", fontFamily: "'Bebas Neue',sans-serif", letterSpacing: 2, lineHeight: 1, animationDelay: "100ms" }}
+        >
           <span style={{ color: "#fff" }}>CLIENT </span>
-          <span style={{ color: "#e63946" }}>TRANSFORMATIONS</span>
+          <span style={{ color: ACCENT }}>TRANSFORMATIONS</span>
         </h2>
       </div>
 
@@ -169,9 +210,11 @@ export default function ClientTransformations() {
         onMouseDown={onMouseDown}
         onMouseMove={onMouseMove}
         onMouseUp={onMouseUp}
-        onMouseLeave={onMouseLeave}
+        onMouseLeave={(e) => { onMouseLeave(e); setPaused(false); }}
+        onMouseEnter={() => setPaused(true)}
         onTouchStart={onTouchStart}
         onTouchEnd={onTouchEnd}
+        className={`anim-rise ${mounted ? "mounted" : ""}`}
         style={{
           position: "relative",
           display: "flex",
@@ -182,6 +225,7 @@ export default function ClientTransformations() {
           cursor: grabbing ? "grabbing" : "grab",
           userSelect: "none",
           overflow: "hidden",
+          animationDelay: "200ms",
         }}
       >
         {/* Prev arrow */}
@@ -221,8 +265,8 @@ export default function ClientTransformations() {
             borderRadius: 16,
             overflow: "hidden",
             position: "relative",
-            border: "2px solid #e63946",
-            boxShadow: "0 0 32px rgba(230,57,70,0.3), 0 8px 40px rgba(0,0,0,0.6)",
+            border: `2px solid ${ACCENT}`,
+            boxShadow: `0 0 32px rgba(255,193,7,0.25), 0 8px 40px rgba(0,0,0,0.6)`,
             animation: "fadeSlide 0.4s ease",
             cursor: "zoom-in",
           }}
@@ -258,7 +302,10 @@ export default function ClientTransformations() {
       </div>
 
       {/* Dots */}
-      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 6, marginTop: "1.5rem", flexWrap: "wrap", padding: "0 1rem" }}>
+      <div
+        className={`anim-rise ${mounted ? "mounted" : ""}`}
+        style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 6, marginTop: "1.5rem", flexWrap: "wrap", padding: "0 1rem", animationDelay: "300ms" }}
+      >
         {slides.map((_, i) => (
           <div
             key={i}
@@ -272,7 +319,7 @@ export default function ClientTransformations() {
               width: i === idx ? 24 : 8,
               height: 8,
               borderRadius: 4,
-              background: i === idx ? "#e63946" : "#333",
+              background: i === idx ? ACCENT : "#333",
               cursor: "pointer",
               transition: "all 0.3s ease",
             }}
@@ -297,8 +344,8 @@ export default function ClientTransformations() {
             style={{
               position: "absolute", top: 16, right: 16,
               width: 36, height: 36, borderRadius: "50%",
-              background: "rgba(230,57,70,0.15)", border: "1px solid #e63946",
-              color: "#e63946", fontSize: 18, cursor: "pointer",
+              background: "rgba(255,193,7,0.15)", border: `1px solid ${ACCENT}`,
+              color: ACCENT, fontSize: 18, cursor: "pointer",
               display: "flex", alignItems: "center", justifyContent: "center",
               zIndex: 10,
             }}
@@ -312,8 +359,8 @@ export default function ClientTransformations() {
               maxHeight: "90vh",
               objectFit: "contain",
               borderRadius: 14,
-              border: "2px solid #e63946",
-              boxShadow: "0 0 60px rgba(230,57,70,0.3)",
+              border: `2px solid ${ACCENT}`,
+              boxShadow: "0 0 60px rgba(255,193,7,0.25)",
               animation: "modalIn 0.25s ease",
             }}
           />

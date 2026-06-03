@@ -21,6 +21,7 @@ import Results from "./pages/Results";
 import Resultsforme from "./pages/Resultsforme";
 import ImportantNotes from "./pages/ImportantNotes";
 import ContactSection from "./pages/ContactSection";
+import CaloriesCalculator from "./pages/CaloriesCalculator";
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const App = () => {
@@ -55,6 +56,8 @@ const App = () => {
           <Route path="/results-for-me" element={<Resultsforme />} />
           <Route path="/important-notes" element={<ImportantNotes />} />
           <Route path="/contact-section" element={<ContactSection/>} />
+          <Route path="/calories-calculator" element={<CaloriesCalculator/>} />
+
        </Routes>
         <Footer />
       </div>

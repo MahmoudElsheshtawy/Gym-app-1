@@ -6,6 +6,7 @@ import Packages from "./Packages";
 import Results from "./Results";
 import ImportantNotes from "./ImportantNotes";
 import ContactSection from "./ContactSection";
+import CaloriesCalculator from "./CaloriesCalculator";
 
 const Home = () => {
   return (
@@ -17,6 +18,7 @@ const Home = () => {
      <Results />
      <ImportantNotes/>
      <ContactSection />
+     <CaloriesCalculator />
       <NavLink
         onClick={() => window.scrollTo({ top: 0, left: 0, behavior: "smooth" })}
       >
