@@ -378,6 +378,7 @@ export default function CalorieCalculator() {
                         borderRadius: 6,
                         background: m.color,
                         width: `${Math.min((m.raw / m.max) * 100, 100)}%`,
+                        
                       }}
                     />
                   </div>

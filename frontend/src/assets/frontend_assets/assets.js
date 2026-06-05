@@ -3,6 +3,18 @@ import bolbol from './bolbol.png'
 import b from './b.jpg'
 import blog from './blog.jpg'
 import home from './home.jpg'
+import one from './one.jpeg'
+import tow from './tow.jpeg'
+import three from './three.jpeg'
+import fore from './fore.jpeg'
+import five from './five.jpeg'
+import six from './six.jpeg'
+import seven from './seven.jpeg'
+import egt from './egt.jpeg'
+import nine from './nine.jpeg'
+// import ten from './ten.jpeg'
+ import background from './background.jpeg'
+ import myVideo from "./myVideo.mp4";
 
 
 
@@ -10,8 +22,19 @@ export const assets = {
     bolbol,
     b,
     home,
-    blog
-    
+    blog,
+    one,
+    tow,
+    three,
+    fore,
+    five,
+    six,
+    seven,
+    egt,
+    nine,
+    background,
+    myVideo
+
 }
 
 
