@@ -29,10 +29,38 @@ const posts = [
   },
 ];
 
+// تايم لاين معاد صياغتها من "قصتي" — مراحل مختصرة ومناسبة لشكل التايم لاين
 const events = [
-  { date: "2021", icon: "🏋️", title: "بدأ رحلتي مع الجيم", desc: "أول يوم في الصالة وقرار التغيير" },
-  { date: "90 يوم", icon: "💪", title: "أول 90 يوم من التحول", desc: "تغيير ملحوظ في الجسم والقوة" },
-  { date: "الآن", icon: "🏆", title: "أكثر من 300 عميل", desc: "نتائج حقيقية في مصر والخليج" },
+  {
+    date: "البداية",
+    icon: "🏋️",
+    title: "شغف الجيم",
+    desc: "دخلت الجيم لأول مرة كأي شاب، هدفي كان بس تحسين شكلي وبناء جسم أفضل.",
+  },
+  {
+    date: "التحول",
+    icon: "🔬",
+    title: "من التمرين إلى الفضول العلمي",
+    desc: "الاهتمام تحول من مجرد التمرين لفهم إزاي جسم الإنسان بيشتغل فعليًا.",
+  },
+  {
+    date: "الاحتراف",
+    icon: "🧑‍🏫",
+    title: "العمل كمدرب",
+    desc: "تعاملت مع فئات عمرية وأهداف مختلفة، من المبتدئين للرياضيين لكبار السن.",
+  },
+  {
+    date: "الاستثمار",
+    icon: "📚",
+    title: "الدراسة والاعتمادات العلمية",
+    desc: "سنوات من الدراسة الذاتية والدورات المتخصصة في التدريب والتغذية، داخل مصر وخارجها.",
+  },
+  {
+    date: "اليوم",
+    icon: "⚙️",
+    title: "سيستم تدريبي متكامل",
+    desc: "نظام أونلاين يجمع بين التدريب والتغذية والمتابعة المستمرة، مبني على العلم مش الاجتهاد.",
+  },
 ];
 
 const photos = [
@@ -168,6 +196,58 @@ function PostCard({ post, delay }) {
   );
 }
 
+/* ─── Timeline Item ─── */
+function TimelineItem({ ev, isLast, delay }) {
+  return (
+    <Reveal delay={delay} className="relative pr-8">
+      {/* الخط الواصل */}
+      {!isLast && (
+        <div
+          style={{
+            position: "absolute",
+            right: 13,
+            top: 30,
+            bottom: -14,
+            width: 2,
+            background: "linear-gradient(to bottom, rgba(255,193,7,0.5), rgba(255,193,7,0.05))",
+          }}
+        />
+      )}
+      {/* دائرة الأيقونة */}
+      <div
+        style={{
+          position: "absolute",
+          right: 0,
+          top: 0,
+          width: 28,
+          height: 28,
+          borderRadius: "50%",
+          background: "rgba(255,193,7,0.12)",
+          border: `1.5px solid ${ACCENT}`,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          fontSize: 13,
+          flexShrink: 0,
+        }}
+      >
+        {ev.icon}
+      </div>
+
+      <div className="pb-5">
+        <span
+          className="inline-block text-[10px] font-bold px-2 py-0.5 rounded-full mb-1.5"
+          style={{ background: "rgba(255,193,7,0.15)", color: ACCENT }}
+        >
+          {ev.date}
+        </span>
+        <div className="text-white font-bold text-sm">{ev.title}</div>
+        <div className="text-white/45 text-xs leading-relaxed mt-0.5">{ev.desc}</div>
+      </div>
+    </Reveal>
+  );
+}
+
 /* ─── Main Page ─── */
 export default function TrainerProfile() {
   const [activePhoto, setActivePhoto] = useState(null);
@@ -283,14 +363,18 @@ export default function TrainerProfile() {
 
             <Reveal delay={260}>
               <div className="bg-white/5 border border-white/10 rounded-2xl p-4">
-                <h3 className="font-bold mb-3" style={{ color: ACCENT }}>Timeline</h3>
-                <div className="space-y-3">
+                <h3 className="font-bold mb-1" style={{ color: ACCENT }}>قصتي</h3>
+                <p className="text-white/40 text-[11px] mb-4 leading-relaxed">
+                  من شغف الجيم… إلى بناء سيستم تدريبي قائم على العلم
+                </p>
+                <div>
                   {events.map((ev, i) => (
-                    <div key={i} className="text-xs pl-3" style={{ borderLeft: `2px solid rgba(255,193,7,0.35)` }}>
-                      <div className="font-bold" style={{ color: ACCENT }}>{ev.icon} {ev.date}</div>
-                      <div className="text-white mt-0.5">{ev.title}</div>
-                      <div className="text-white/40">{ev.desc}</div>
-                    </div>
+                    <TimelineItem
+                      key={i}
+                      ev={ev}
+                      isLast={i === events.length - 1}
+                      delay={i * 90}
+                    />
                   ))}
                 </div>
               </div>

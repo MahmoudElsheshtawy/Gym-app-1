@@ -2,15 +2,18 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { assets } from "../assets/frontend_assets/assets";
 
 const slides = [
-  { src: assets.bolbol },
-  { src: assets.blog },
-  { src: assets.home },
-  { src: assets.blog },
-  { src: assets.b },
-  { src: assets.home },
-  { src: assets.bolbol },
-  { src: assets.home },
-  { src: assets.b },
+  { src: assets.ttow },
+  { src: assets.tthree },
+  // { src: assets.tten },
+  { src: assets.tfor },
+  { src: assets.abdo },
+  { src: assets.tsix },
+  { src: assets.tet },
+  { src: assets.tone },
+  { src: assets.tfif },
+
+// import ten from './ten.jpeg'
+
 ];
 
 const TOTAL = slides.length;

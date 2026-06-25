@@ -141,10 +141,7 @@ export default function About() {
           </h2>
 
           <p className="text-gray-300 text-base sm:text-lg leading-relaxed max-w-lg">
-            I'm Ahmed Shady I've been in bodybuilding for some years now I have
-            experience and I participated in tournaments let me help you I've
-            helped a lot of people before you can see the transformations in my
-            clients
+          I’m Mohamed Nabil, a Bachelor of Science (B.Sc.) graduate, an EREPS Registered International Fitness Coach, and a Certified Sports Nutrition Specialist.
           </p>
 
           <div>

@@ -5,6 +5,18 @@ import { Dumbbell } from "lucide-react";
 
 const ACCENT = "#FFC107";
 
+// خط هادئ ومميز لاسم اللوجو + تدرج أبيض → أصفر → أسود
+const logoTextStyle = {
+  fontFamily: "'Outfit', 'Cairo', sans-serif",
+  fontWeight: 700,
+  letterSpacing: "0.02em",
+  backgroundImage: "linear-gradient(100deg, #ffffff 0%, #ffffff 28%, #FFC107 55%, #1a1a1a 88%)",
+  WebkitBackgroundClip: "text",
+  backgroundClip: "text",
+  color: "transparent",
+  WebkitTextFillColor: "transparent",
+};
+
 const Navbar = () => {
   const [scrolling, setScrolling] = useState(false);
   const [open, setOpen] = useState(false);
@@ -31,11 +43,17 @@ const Navbar = () => {
     { name: "Results", path: "/results-for-me" },
     { name: "Packages", path: "/packages" },
     { name: "Contact", path: "/contact" },
-    { name: "Calories Calculator", path: "/calories-calculator" }
+    { name: "Calories Calculator", path: "/calories-calculator" },
+    { name: "Important Notes", path: "/important-notes" },
+    // { name: "Coaches", path: "/coaches-section" }
   ];
 
   return (
     <>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&display=swap');
+      `}</style>
+
       {/* NAVBAR */}
       <div
         className={`fixed top-0 left-0 w-full z-[999] transition-all duration-500 ${
@@ -54,8 +72,8 @@ const Navbar = () => {
             >
               <Dumbbell className="w-5 h-5 sm:w-6 sm:h-6" style={{ color: "#1a1300" }} />
             </div>
-            <h1 className="text-white text-xl sm:text-2xl md:text-3xl font-extrabold tracking-wide">
-              Mo Nabil
+            <h1 className="text-xl sm:text-2xl md:text-3xl tracking-wide" style={logoTextStyle}>
+              Fit With Nabil
             </h1>
           </Link>
 
@@ -119,7 +137,7 @@ const Navbar = () => {
           <div className="p-1.5 rounded-xl" style={{ background: ACCENT }}>
             <Dumbbell className="w-5 h-5" style={{ color: "#1a1300" }} />
           </div>
-          <h1 className="text-white text-xl font-extrabold">Mo Nabil</h1>
+          <h1 className="text-xl" style={logoTextStyle}>Mo Nabil</h1>
         </div>
 
         {/* Links */}

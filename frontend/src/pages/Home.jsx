@@ -7,6 +7,7 @@ import Results from "./Results";
 import ImportantNotes from "./ImportantNotes";
 import ContactSection from "./ContactSection";
 import CaloriesCalculator from "./CaloriesCalculator";
+// import CoachesSection from "./Coachessection";
 
 const Home = () => {
   return (
@@ -15,6 +16,8 @@ const Home = () => {
 
     <About />
      <Packages />
+    {/* <CoachesSection /> */}
+
      <Results />
      <ImportantNotes/>
      <ContactSection />

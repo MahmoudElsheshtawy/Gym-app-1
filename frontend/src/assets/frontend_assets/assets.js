@@ -12,15 +12,35 @@ import six from './six.jpeg'
 import seven from './seven.jpeg'
 import egt from './egt.jpeg'
 import nine from './nine.jpeg'
-// import ten from './ten.jpeg'
  import background from './background.jpeg'
  import myVideo from "./myVideo.mp4";
+import tone from './tone.jpeg'
+import ttow from './ttow.jpeg'
+import tthree from './tthree.jpeg'
+import tfor from './tfor.jpeg'
+import tfif from './tfif.jpeg'
+import tsix from './tsix.jpeg'
+import tten from './egt.jpeg'
+import tnine from './nine.jpeg'
+import tet from './tet.jpeg'
+import abdo from './abdo.jpeg'
+// import ten from './ten.jpeg'
 
 
 
 export const assets = {
+     tone,
+    tfif,
+    tsix,
+    tfor,
+    tnine,
+    ttow,
+    tthree,
+    tten,
+    tet,
     bolbol,
     b,
+    abdo,
     home,
     blog,
     one,

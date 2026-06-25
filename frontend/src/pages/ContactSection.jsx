@@ -61,7 +61,7 @@ export default function ContactSection() {
           margin: "0 0 4px",
           textShadow: "0 0 40px rgba(255,193,7,0.5)",
         }}>
-          elpolpol
+           تواصل معي
         </h1>
 
         <p style={{ color: "#aaa", fontSize: 15, letterSpacing: 2, marginBottom: 36 }}>
