@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap:https://fit-with-nabil.vercel.app/sitemap.xml
