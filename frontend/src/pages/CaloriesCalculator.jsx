@@ -1,7 +1,13 @@
 import { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 
 const ACCENT = "#FFC107";
-
+ const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 const activityLevels = [
   { id: "sedentary", label: "قليل الحركة", desc: "عمل مكتبي، بدون رياضة", factor: 1.2 },
   { id: "light", label: "نشاط خفيف", desc: "رياضة 1-3 أيام أسبوعياً", factor: 1.375 },
@@ -219,12 +225,26 @@ export default function CalorieCalculator() {
         }
 
         select.calc-input { appearance: none; }
+
+        .cta-btn {
+          display: inline-block;
+          background: ${ACCENT};
+          color: #1a1300;
+          font-weight: 700;
+          font-size: 14px;
+          padding: 11px 26px;
+          border-radius: 999px;
+          text-decoration: none;
+          transition: transform 0.2s, box-shadow 0.2s;
+          box-shadow: 0 0 0 rgba(255,193,7,0);
+        }
+        .cta-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(255,193,7,0.3); }
       `}</style>
 
       <div style={{ width: "100%", maxWidth: 460 }}>
 
         {/* Header */}
-        <div className={`anim-rise ${mounted ? "mounted" : ""}`} style={{ textAlign: "center", marginBottom: "2rem", animationDelay: "0ms" }}>
+        <div className={`anim-rise ${mounted ? "mounted" : ""}`} style={{ textAlign: "center", marginBottom: "1.5rem", animationDelay: "0ms" }}>
           <p style={{ color: ACCENT, fontSize: 12, letterSpacing: 3, textTransform: "uppercase", margin: "0 0 8px" }}>
             حساب فوري
           </p>
@@ -232,8 +252,30 @@ export default function CalorieCalculator() {
             حاسبة السعرات الحرارية
           </h1>
           <p style={{ color: "#888", fontSize: 13, marginTop: 8 }}>
-            احسب احتياجك اليومي من السعرات والماكروز
+            احسب سعراتك بسهولة مع أداة حساب السعرات
           </p>
+        </div>
+
+        {/* Caveat / CTA Note */}
+        <div
+          className={`anim-rise ${mounted ? "mounted" : ""}`}
+          style={{
+            background: "rgba(255,193,7,0.06)",
+            border: "1px solid rgba(255,193,7,0.25)",
+            borderRadius: 14,
+            padding: "1rem 1.1rem",
+            marginBottom: "1.5rem",
+            animationDelay: "60ms",
+            textAlign: "center",
+          }}
+        >
+          <p style={{ fontSize: 13, color: "#ddd", lineHeight: 1.9, margin: "0 0 12px" }}>
+            لكن خلي بالك، الأرقام دي مش كفاية لوحدها. عشان تحصل على نتائج فعّالة، محتاج{" "}
+            <span style={{ color: ACCENT, fontWeight: 700 }}>نظام غذائي مصمم خصيصاً ليك</span>، مع متابعة دقيقة وتوجيه مستمر.
+          </p>
+          {/* <Link to="/packages" className="cta-btn">
+            ابدأ رحلتك معانا النهارده
+          </Link> */}
         </div>
 
         {/* Form Card */}
@@ -334,7 +376,7 @@ export default function CalorieCalculator() {
 
         {/* Result */}
         {result && (
-          <div key={result.target} className="result-card" style={{ background: "#141414", border: `1px solid rgba(255,193,7,0.3)`, borderRadius: 18, padding: "1.5rem" }}>
+          <div key={result.target} className="result-card" style={{ background: "#141414", border: `1px solid rgba(255,193,7,0.3)`, borderRadius: 18, padding: "1.5rem", marginBottom: "1.5rem" }}>
 
             {/* Main target */}
             <div style={{ textAlign: "center", marginBottom: "1.5rem" }}>
@@ -378,12 +420,21 @@ export default function CalorieCalculator() {
                         borderRadius: 6,
                         background: m.color,
                         width: `${Math.min((m.raw / m.max) * 100, 100)}%`,
-                        
                       }}
                     />
                   </div>
                 </div>
               ))}
+            </div>
+
+            {/* Bottom CTA after result */}
+            <div style={{ textAlign: "center", marginTop: "1.5rem", paddingTop: "1.2rem", borderTop: "1px solid #222" }}>
+              <p style={{ fontSize: 12, color: "#999", marginBottom: 10, lineHeight: 1.8 }}>
+                دي بداية كويسة، لكن الخطة الحقيقية اللي بتحقق نتيجة محتاجة متابعة شخصية.
+              </p>
+              <Link onClick={scrollToTop}  to="/packages" className="cta-btn">
+                ابدأ رحلتك معانا النهارده
+              </Link>
             </div>
           </div>
         )}

@@ -5,12 +5,14 @@ const ACCENT = "#FFC107";
 
 // ضيف صورك هنا — كل عنصر فيه صورة واحدة بس
 const transformations = [
+  { image: assets.nthree, label: null },
   { image: assets.ttow, label: null },
   { image: assets.tthree, label: null },
+  { image: assets.none, label: null },
   { image: assets.tfor, label: null },
   { image: assets.tsix, label: null },
   { image: assets.tet, label: null },
-  { image: assets.abdo, label: null },
+  { image: assets.ntow, label: null },
   { image: assets.tone, label: null },
   { image: assets.tfif, label: null },
 
@@ -20,9 +22,9 @@ const transformations = [
 // Featured transformation (الكارد الكبير في الأعلى)
 const featured = {
   images: [
-    assets.abdo || "/fallback.jpg",
+    assets.nthree || "/fallback.jpg",
     assets.tthree || "/fallback.jpg",
-    assets.tet || "/fallback.jpg",
+    assets.ntow || "/fallback.jpg",
   ],
   title: "تحول جذري وشامل",
   subtitle: "قصة نجاح مميزة",

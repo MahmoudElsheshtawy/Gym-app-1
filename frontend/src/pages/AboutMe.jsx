@@ -13,20 +13,7 @@ const posts = [
     content: `ليه تتدرب معايا؟\n\nالتدريب مش بس رفع أثقال، هو أسلوب حياة. أنا بساعدك توصل لهدفك بأسرع وقت ممكن مع برنامج مخصص ليك بالكامل.\n\nأنا مؤمن إن كل واحد عنده القدرة يغير جسمه، بس محتاج الطريق الصح والإرشاد الصح.\n\nأبدأ رحلتك معايا النهارده! 💪`,
     likes: 342, comments: 58, shares: 91,
   },
-  {
-    id: 2,
-    avatar: "م",
-    name: "محمد نبيل",
-    handle: "@mohamednabilfit",
-    time: "منذ أسبوع",
-    content: `في 2021 بدأت رحلتي مع الجيم، كنت شايف الناس بتتحول وأنا واقف في مكاني 😅 قررت أغير ده.\n\nفي 2023 وصلت لـ 300 متبع 🎉 وحسيت إن الوقت جه أشارك تجربتي.\n\nمن 2021 لحد دلوقتي عملت أكتر من 300 عميل من مصر والخليج والمغرب، وكل يوم بيزيد العدد.\n\nالنتائج بتتكلم عن نفسها 💯`,
-    likes: 891, comments: 134, shares: 267,
-    cta: {
-      text: "أنت. تبدأ تكون من قصص النجاح؟",
-      sub: "أضغط الزرار اللي تحت وابدأ رحلتك.",
-      btn: "ابدأ التحول الآن",
-    },
-  },
+
 ];
 
 // تايم لاين معاد صياغتها من "قصتي" — مراحل مختصرة ومناسبة لشكل التايم لاين
@@ -298,7 +285,7 @@ export default function TrainerProfile() {
             </h1>
             <p className="text-white/40 text-xs mt-1">Online Fitness Coach • 6 Years Experience</p>
             <div className="flex gap-4 text-xs mt-2 text-white/60">
-              <span><b className="text-white">1K</b> followers</span>
+              <span><b className="text-white">4.5K</b> followers</span>
               <span><b className="text-white">9</b> following</span>
             </div>
           </div>

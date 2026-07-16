@@ -24,11 +24,17 @@ import tten from './egt.jpeg'
 import tnine from './nine.jpeg'
 import tet from './tet.jpeg'
 import abdo from './abdo.jpeg'
+import none from './none.jpeg'
+import ntow from './ntow.jpeg'
+import nthree from './nthree.jpeg'
 // import ten from './ten.jpeg'
 
 
 
 export const assets = {
+    none,
+    ntow,
+    nthree,
      tone,
     tfif,
     tsix,

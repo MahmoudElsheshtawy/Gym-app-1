@@ -4,9 +4,12 @@ import { assets } from "../assets/frontend_assets/assets";
 const slides = [
   { src: assets.ttow },
   { src: assets.tthree },
-  // { src: assets.tten },
-  { src: assets.tfor },
-  { src: assets.abdo },
+  { src: assets.nthree },
+  { src: assets.ntow },
+
+  { src: assets.none },
+  // { src: assets.tfor },
+  // { src: assets.abdo },
   { src: assets.tsix },
   { src: assets.tet },
   { src: assets.tone },
