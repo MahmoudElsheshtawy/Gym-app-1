@@ -2,11 +2,29 @@ import { useState, useEffect, useRef } from "react";
 
 const plans = [
   {
+    name: "باقة التجربة",
+    price: "600",
+    period: "/ 30 يوم",
+    discount: "ابدأ رحلتك وجرّب قبل ما تلتزم",
+    badge: "🎯 ابدأ من هنا",
+    followUp: "كل 3 أيام",
+    followUpType: "weekly", // weekly = أسبوعي/كل 3 أيام
+    features: [
+      "برنامج غذائي مخصص حسب هدفك واحتياجاتك",
+      "برنامج تمرين احترافي مناسب لمستواك",
+      "متابعة وتقييم كل 3 أيام لضمان الالتزام",
+      "تعديل الخطة عند الحاجة",
+      "دعم وإرشاد مستمر للإجابة على استفساراتك",
+    ],
+  },
+  {
     name: "Fit Start",
     price: "1,200",
     originalPrice: "1,715",
     period: "/ 3 أشهر",
     discount: "خصم 30% طوال فترة الصيف",
+    followUp: "أسبوعية",
+    followUpType: "weekly",
     features: [
       "برنامج تغذية مخصص بالكامل حسب هدفك",
       "برنامج تدريب احترافي يناسب التمرين في الجيم أو المنزل",
@@ -23,12 +41,14 @@ const plans = [
     discount: "خصم 30%",
     badge: "⭐ الأكثر مبيعًا",
     featured: true,
+    followUp: "يومية",
+    followUpType: "daily",
     features: [
       "تشمل جميع مميزات باقة Fit Start وأكثر",
       "متابعة يومية عبر واتساب (Chat)",
       "متابعة التحاليل الطبية وتقديم التوصيات المناسبة وفقًا لها",
       "مراجعة فيديوهات التمرين وتصحيح الأداء أسبوعيًا",
-      "تعديل البرنامج الغذائي والتدريبي أولًا بأول وفقًا لتقدمك ونتائج المتابعة",
+      "تعديل البرنامج الغذائي والتدريبي أولًا بأول وفقًا لتقدمك",
     ],
   },
   {
@@ -38,12 +58,14 @@ const plans = [
     period: "/ 3 أشهر",
     discount: "خصم 30%",
     badge: "👑 التجربة الأكثر تميزًا",
+    followUp: "يومية + فيديو",
+    followUpType: "daily",
     features: [
       "تشمل جميع مميزات باقة Fit Pro وأكثر",
-      "مكالمة فيديو (Video Call) كل 15 يوم لمناقشة تقدمك والإجابة على استفساراتك",
+      "مكالمة فيديو (Video Call) كل 15 يوم لمناقشة تقدمك",
       "أولوية كاملة في الرد والمتابعة طوال فترة الاشتراك",
-      "مراجعة غير محدودة لفيديوهات التمرين مع تصحيح الأداء أولًا بأول",
-      "متابعة شخصية شاملة مع تعديلات فورية على التغذية والتمرين لضمان أفضل النتائج",
+      "مراجعة غير محدودة لفيديوهات التمرين مع تصحيح الأداء",
+      "متابعة شخصية شاملة مع تعديلات فورية على التغذية والتمرين",
     ],
   },
   {
@@ -53,11 +75,13 @@ const plans = [
     period: "/ 180 يوم",
     discount: "خصم 30%",
     badge: "🏆 أفضل قيمة للتحول الكامل",
+    followUp: "يومية + فيديو",
+    followUpType: "daily",
     features: [
       "تشمل جميع مميزات باقة Fit Elite VIP وأكثر",
-      "متابعة شخصية كاملة لمدة 180 يوم لضمان تحقيق أفضل النتائج",
-      "مكالمة فيديو (Video Call) كل 20 يوم لمراجعة التقدم والإجابة على استفساراتك",
-      "إعادة تصميم البرنامج الغذائي والتدريبي بالكامل كلما تطلب تقدمك ذلك",
+      "متابعة شخصية كاملة لمدة 180 يوم",
+      "مكالمة فيديو (Video Call) كل 20 يوم لمراجعة التقدم",
+      "إعادة تصميم البرنامج الغذائي والتدريبي كلما تطلب تقدمك ذلك",
       "خطة مخصصة للحفاظ على النتائج (Maintenance Plan) قبل انتهاء الاشتراك",
     ],
   },
@@ -73,6 +97,8 @@ const features = [
 ];
 
 const ACCENT = "#FFC107";
+const DAILY_COLOR = "#e63946";
+const WEEKLY_COLOR = "#4ade80";
 
 function useReveal() {
   const ref = useRef(null);
@@ -88,7 +114,6 @@ function useReveal() {
   return [ref, visible];
 }
 
-// أنيميشن هادئ: حركة بسيطة لأعلى مع فيد ناعم وتوقيت مريح للعين
 function Reveal({ children, delay = 0, className = "" }) {
   const [ref, visible] = useReveal();
   return (
@@ -106,7 +131,6 @@ function Reveal({ children, delay = 0, className = "" }) {
   );
 }
 
-// هيدر موحّد لكل الأقسام
 function SectionHeader({ eyebrow, title, subtitle }) {
   return (
     <Reveal>
@@ -129,6 +153,24 @@ function SectionHeader({ eyebrow, title, subtitle }) {
         />
       </div>
     </Reveal>
+  );
+}
+
+// Follow-up badge component
+function FollowUpBadge({ type, label }) {
+  const isDaily = type === "daily";
+  return (
+    <div
+      className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] sm:text-xs font-bold"
+      style={{
+        background: isDaily ? "rgba(230,57,70,0.15)" : "rgba(74,222,128,0.12)",
+        border: `1px solid ${isDaily ? "rgba(230,57,70,0.4)" : "rgba(74,222,128,0.35)"}`,
+        color: isDaily ? DAILY_COLOR : WEEKLY_COLOR,
+      }}
+    >
+      <span>{isDaily ? "🔴" : "🟢"}</span>
+      <span>متابعة {label}</span>
+    </div>
   );
 }
 
@@ -173,7 +215,14 @@ ${plan.features.map((f) => `✔ ${f}`).join("\n")}
 
         <h3 className="text-white font-bold text-base sm:text-lg mb-2 mt-1">{plan.name}</h3>
 
-        <div className="mt-2 flex items-baseline gap-2 flex-wrap">
+        {/* Follow-up highlight badge */}
+        {plan.followUp && (
+          <div className="mb-3">
+            <FollowUpBadge type={plan.followUpType} label={plan.followUp} />
+          </div>
+        )}
+
+        <div className="mt-1 flex items-baseline gap-2 flex-wrap">
           <span className="text-2xl sm:text-3xl font-black text-white">{plan.price}</span>
           <span className="text-xs sm:text-sm text-white/50 font-normal">جنيه</span>
           <span className="text-[10px] sm:text-xs text-white/40">{plan.period}</span>
@@ -192,12 +241,35 @@ ${plan.features.map((f) => `✔ ${f}`).join("\n")}
         <div className="border-t border-white/10 my-3 sm:my-4"></div>
 
         <div className="space-y-2 flex-1">
-          {plan.features.map((f, i) => (
-            <div key={i} className="text-white/70 text-xs sm:text-sm flex gap-2 items-start">
-              <span className="text-xs sm:text-sm mt-0.5 flex-shrink-0" style={{ color: ACCENT }}>✓</span>
-              <span className="flex-1 leading-relaxed">{f}</span>
-            </div>
-          ))}
+          {plan.features.map((f, i) => {
+            // هايلات الميزات اللي فيها متابعة يومية
+            const isDailyFeature =
+              f.includes("يومية") || f.includes("يومي") || f.includes("أولًا بأول") || f.includes("فورية");
+            return (
+              <div key={i} className="text-white/70 text-xs sm:text-sm flex gap-2 items-start">
+                <span
+                  className="text-xs sm:text-sm mt-0.5 flex-shrink-0"
+                  style={{ color: isDailyFeature ? DAILY_COLOR : ACCENT }}
+                >
+                  ✓
+                </span>
+                <span
+                  className="flex-1 leading-relaxed"
+                  style={isDailyFeature ? { color: "rgba(255,255,255,0.9)", fontWeight: 600 } : {}}
+                >
+                  {f}
+                  {isDailyFeature && (
+                    <span
+                      className="mr-1.5 text-[9px] px-1.5 py-0.5 rounded-full font-bold"
+                      style={{ background: "rgba(230,57,70,0.2)", color: DAILY_COLOR, border: "1px solid rgba(230,57,70,0.3)" }}
+                    >
+                      يومي
+                    </span>
+                  )}
+                </span>
+              </div>
+            );
+          })}
         </div>
 
         <button
@@ -253,6 +325,28 @@ export default function Packages() {
         </div>
       </Reveal>
 
+      {/* Follow-up legend */}
+      <Reveal>
+        <div className="flex justify-center gap-4 sm:gap-6 mb-10 flex-wrap">
+          <div className="flex items-center gap-2 text-xs sm:text-sm">
+            <span
+              className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full font-bold"
+              style={{ background: "rgba(74,222,128,0.12)", border: "1px solid rgba(74,222,128,0.35)", color: WEEKLY_COLOR }}
+            >
+              🟢 متابعة أسبوعية / كل 3 أيام
+            </span>
+          </div>
+          <div className="flex items-center gap-2 text-xs sm:text-sm">
+            <span
+              className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full font-bold"
+              style={{ background: "rgba(230,57,70,0.15)", border: "1px solid rgba(230,57,70,0.4)", color: DAILY_COLOR }}
+            >
+              🔴 متابعة يومية
+            </span>
+          </div>
+        </div>
+      </Reveal>
+
       {/* FEATURES */}
       <div className="mb-16">
         <SectionHeader eyebrow="لماذا تشترك معنا" title="المميزات" />
@@ -276,7 +370,7 @@ export default function Packages() {
       {/* PLANS */}
       <div className="mb-4">
         <SectionHeader eyebrow="خطة الأسعار الجديدة" title="باقات الاشتراك" subtitle="اختر الباقة المناسبة لهدفك ومستوى المتابعة اللي محتاجه" />
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 sm:gap-5">
           {plans.map((p, i) => (
             <PlanCard key={i} plan={p} delay={i * 100} />
           ))}
