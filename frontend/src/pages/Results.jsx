@@ -14,6 +14,7 @@ const slides = [
   { src: assets.tet },
   { src: assets.tone },
   { src: assets.tfif },
+  { src: assets.last },
 
 // import ten from './ten.jpeg'
 

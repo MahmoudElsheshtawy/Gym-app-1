@@ -27,7 +27,7 @@ import abdo from './abdo.jpeg'
 import none from './none.jpeg'
 import ntow from './ntow.jpeg'
 import nthree from './nthree.jpeg'
-// import ten from './ten.jpeg'
+import last from './last.jpeg'
 
 
 
@@ -46,6 +46,7 @@ export const assets = {
     tet,
     bolbol,
     b,
+    last,
     abdo,
     home,
     blog,

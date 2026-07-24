@@ -15,6 +15,7 @@ const transformations = [
   { image: assets.ntow, label: null },
   { image: assets.tone, label: null },
   { image: assets.tfif, label: null },
+  { image: assets.last, label: null },
 
 
 ];
